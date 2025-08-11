@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+	/* Primary colors */
+	--color-blue: #00AEEF;
+	--color-green: #37B778;
+	--color-white: #F9F7F3;
+	--color-black: #1F1F1F;
+
+	/* Secondary colors */
+	--color-dark-blue: #0D5773;
+	--color-dark-green: #206A45;
+	--color-purple: #BF22FD;
+	--color-yellow: #FFB520;
+	--color-alternative-red: #F5675C;
+	--color-red: #F44336;
+
+	/* Color primary processor */
+	--color-primary: var(--color-green);
+
+	/* Fonts */
+	--font-primary: var(--unbounded);
+	--font-secondary: var(--red-hat-display);
+}
+
+.role-freelancer {
+	--color-primary: var(--color-green)
+}
+
+.role-client {
+	--color-primary: var(--color-blue)
+}
+
+@layer base {
+	h1 {
+		@apply text-[36px] font-primary font-extrabold max-sm:text-3xl
+	}
+
+	* {
+		@apply text-black font-secondary
+	}
+
+	textarea, input {
+		@apply px-[26px] py-[18px] max-sm:px-5 max-sm:text-sm text-[18px] cursor-pointer border-1 border-[rgba(31,31,31,0.1)] rounded-[18px] focus:outline-none focus:cursor-text focus:shadow-[0_0_26px_0_rgba(0,0,0,0.08)] focus:border-white duration-200 transition-all focus:placeholder:opacity-0 invalid:border-red invalid:bg-[rgba(244,67,54,0.05)]
+	}
+
+	input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+		appearance: none;
+	}
+
+	::placeholder {
+		@apply font-medium text-[18px] text-black opacity-20
+	}
+}
+
+@layer components {
+	.big-button {
+		@apply font-primary font-extrabold text-white text-[21px] bg-gradient-to-r from-blue to-green py-[18px] rounded-[18px] hover:-translate-y-2.5 hover:shadow-[0_10px_14px_rgba(0,0,0,0.15)] duration-200 ease-out transition cursor-pointer max-sm:text-lg max-sm:py-3.5 focus:to-dark-green
+	}
+
+	.normal-button {
+		@apply font-primary font-bold text-white bg-primary py-3 rounded-[14px] hover:-translate-y-2 hover:drop-shadow-[0_10px_4px_rgba(0,0,0,0.15)] duration-200 transition-[translate_shadow] cursor-pointer focus:bg-dark-green px-[23px] max-md:px-4 max-md:text-sm max-md:py-3
+	}
+}
+
+body {
+	background-color: var(--color-white);
+}

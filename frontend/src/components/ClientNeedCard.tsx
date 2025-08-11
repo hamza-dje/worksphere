@@ -1,0 +1,76 @@
+import BidDialogButton from "./BidDialogButton";
+
+interface ClientNeedCardProps {
+    title: string;
+    priceRange: [start: number, end: number];
+    category: string;
+    time: number;
+    bids: number;
+    description: string;
+    skills: string[];
+    clientName: string;
+}
+
+export default function ClientNeedCard({ title, priceRange, category, time, bids, description, skills, clientName }: ClientNeedCardProps) {
+    return (
+        <div className="border-1 border-[oklch(from_var(--color-black)_l_c_h_/_0.1)] px-10 py-9 max-sm:p-6 md:px-[84px] md:py-[40px] rounded-[36px] mb-[50px]">
+            <div className="flex justify-between gap-7">
+                <h2 className="font-primary font-extrabold text-primary md:text-[28px]">
+                    {title}
+                </h2>
+                <span className="font-primary font-extrabold text-primary md:text-[28px] text-nowrap">
+                    ${priceRange[0]} - ${priceRange[1]}
+                </span>
+            </div>
+
+            <div className="flex justify-between opacity-50 mb-[24px]">
+                <span className="font-primary text-primary md:text-lg text-xs">
+                    {category}
+                </span>
+                <span className="font-primary text-primary md:text-lg text-xs">
+                    {time} hours ago{bids && `, ${bids} bid${bids > 1 && 's'}`}
+                </span>
+            </div>
+
+            <div className="flex flex-col max-sm:flex-col-reverse">
+                <p className="text-xl max-md:text-sm max-md:tracking-wide text-black mb-[30px] md:leading-8">
+                    {description}
+                </p>
+
+                <div className="flex gap-[8px] flex-wrap mb-[40px] max-sm:mb-4 max-md:gap-1.5">
+                    {
+                        skills.map((skill, i) =>
+                            <span
+                                key={i}
+                                className="bg-[oklch(from_var(--color-primary)_l_c_h_/_0.15)] px-[18px] py-[10px] font-primary font-medium text-xs rounded-full max-md:text-[10px] max-md:px-3 max-md:py-1.5"
+                            >
+                                {skill}
+                            </span>)
+                    }
+                </div>
+            </div>
+
+            <div className="flex justify-between">
+                <div className="flex items-center gap-[18px] max-md:gap-2.5">
+                    <div className="w-9 max-md:w-7 aspect-square rounded-full bg-primary" />
+                    <h3 className="font-primary text-[18px] max-md:text-sm">
+                        {clientName}
+                    </h3>
+                </div>
+
+                <div className="flex gap-[18px] max-md:gap-2">
+                    <button className="normal-button border-2 border-red bg-transparent opacity-30 hover:opacity-100 max-sm:py-0">
+                        <span className="max-sm:hidden font-primary font-bold text-red flex items-center gap-2">
+                            Report
+                            <div className="w-3.5 aspect-square rounded-full border-[1.5px] border-red h-fit relative">
+                                <span className="text-red absolute left-[50%] top-[50%] -translate-[50%] font-extrabold text-[10px]">!</span>
+                            </div>
+                        </span>
+                        <span className="sm:hidden font-extrabold text-red text-lg">!</span>
+                    </button>
+                    <BidDialogButton />
+                </div>
+            </div>
+        </div>
+    );
+}
