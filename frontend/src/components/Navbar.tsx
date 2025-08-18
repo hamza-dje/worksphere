@@ -31,7 +31,7 @@ export default function Navbar() {
 
     useEffect(() => {
         let timeout: NodeJS.Timeout;
-        if (makeVisible) {
+        if (makeVisible && window.innerWidth > 640) {
             timeout = setTimeout(() => setMakeVisible(false), 1500);
         }
 
@@ -139,7 +139,7 @@ export default function Navbar() {
                         }}
                     >
                         <div
-                            className={`max-sm:absolute ${makeVisible || filterFixed ? 'sm:-translate-y-4 sm:max-xl:-translate-y-5' : 'opacity-0 sm:-translate-y-full'} sm:group-hover:-translate-y-4 sm:max-xl:group-hover:-translate-y-5 sm:group-hover:opacity-100 max-sm:w-full max-sm:flex max-sm:flex-col max-sm:gap-4 transition-[top_translate_opacity] duration-[250ms] ease-out ${filterShown ? 'max-sm:top-0' : 'max-sm:-top-[320px]'}`}
+                            className={`max-sm:absolute ${makeVisible || filterFixed ? 'sm:-translate-y-4 sm:max-xl:-translate-y-5' : 'sm:opacity-0 sm:-translate-y-full'} sm:group-hover:-translate-y-4 sm:max-xl:group-hover:-translate-y-5 max-sm:-translate-y-5 sm:group-hover:opacity-100 max-sm:w-full max-sm:flex max-sm:flex-col max-sm:gap-4 transition-[top_translate_opacity] duration-[250ms] ease-out ${filterShown ? 'max-sm:top-0' : 'max-sm:-top-[320px]'}`}
                         >
                             <form
                                 className={`bg-white p-6 relative !pt-10 max-xl:p-5 max-sm:flex-col flex w-[1200px] max-xl:w-[945px] max-xl:gap-2.5 max-lg:w-[calc(100%-64px)] max-md:w-full mx-auto shadow-[0_0_27px_rgba(0,0,0,0.08)] rounded-b-[36px] gap-4 [&_input]:placeholder:text-[16px] [&_input,&_select]:px-4 [&_input,&_select]:py-3.5 ${!filterShown && 'max-sm:opacity-0 max-sm:pointer-events-none'}`}>
