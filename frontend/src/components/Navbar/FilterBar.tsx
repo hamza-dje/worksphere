@@ -21,6 +21,10 @@ export default function FilterBar({ navbarHeight }: { navbarHeight: number }) {
         return () => clearTimeout(timeout);
     }, []);
 
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+    }
+
     return (
         <div
             className="sticky z-9 max-md:w-[calc(100%-16px)] mx-auto sm:h-[60px] group"
@@ -32,7 +36,9 @@ export default function FilterBar({ navbarHeight }: { navbarHeight: number }) {
                 className={`max-sm:absolute ${makeVisible || filterFixed ? 'sm:-translate-y-4 sm:max-xl:-translate-y-5' : 'sm:opacity-0 sm:-translate-y-full'} sm:group-hover:-translate-y-4 sm:max-xl:group-hover:-translate-y-5 max-sm:-translate-y-5 sm:group-hover:opacity-100 max-sm:w-full max-sm:flex max-sm:flex-col max-sm:gap-4 transition-[top_translate_opacity] duration-[250ms] ease-out ${filterShown ? 'max-sm:top-0' : 'max-sm:-top-[320px]'}`}
             >
                 <form
-                    className={`bg-white p-6 relative !pt-10 max-xl:p-5 max-sm:flex-col flex w-[1200px] max-xl:w-[945px] max-xl:gap-2.5 max-lg:w-[calc(100%-64px)] max-md:w-full mx-auto shadow-[0_0_27px_rgba(0,0,0,0.08)] rounded-b-[36px] gap-4 [&_input]:placeholder:text-[16px] [&_input,&_select]:px-4 [&_input,&_select]:py-3.5 ${!filterShown && 'max-sm:opacity-0 max-sm:pointer-events-none'}`}>
+                    onSubmit={handleSubmit}
+                    className={`bg-white p-6 relative !pt-10 max-xl:p-5 max-sm:flex-col flex w-[1200px] max-xl:w-[945px] max-xl:gap-2.5 max-lg:w-[calc(100%-64px)] max-md:w-full mx-auto shadow-[0_0_27px_rgba(0,0,0,0.08)] rounded-b-[36px] gap-4 [&_input]:placeholder:text-[16px] [&_input,&_select]:px-4 [&_input,&_select]:py-3.5 ${!filterShown && 'max-sm:opacity-0 max-sm:pointer-events-none'}`}
+                >
                     <button
                         type="button"
                         onClick={() => setFilterFixed(f => !f)}
@@ -129,12 +135,12 @@ export default function FilterBar({ navbarHeight }: { navbarHeight: number }) {
                 </form>
                 <button
                     onClick={() => setFilterShown(f => !f)}
-                    className="normal-button self-end sm:hidden shadow-[0_0_20px_rgba(0,0,0,0.5)] p-4"
+                    className="normal-button bg-white self-end sm:hidden shadow-[0_0_16px_rgba(0,0,0,0.1)] p-4 text-primary"
                 >
                     {
                         filterShown
                             ? 'Close'
-                            : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 22" className="size-6 stroke-white">
+                            : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 22" className="size-6 stroke-primary">
                                 <path d="M2 4H7.49994H12.9999V2V6M8 11H18.9999M8 11V9M8 11V13M16.9999 4H18.9999M4 11H2M12.9999 18H2M12.9999 18V16M12.9999 18V20M16.9999 18H18.9999" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                     }

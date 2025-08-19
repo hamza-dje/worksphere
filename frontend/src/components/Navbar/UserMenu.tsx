@@ -1,5 +1,5 @@
 import { SetStateAction } from "react";
-import MenuButton from "../MenuButton";
+import MenuButton from "./navbar-components/MenuButton";
 
 export default function UserMenu({ userMenuShown, setUserMenuShown }: { userMenuShown: boolean, setUserMenuShown: React.Dispatch<SetStateAction<boolean>> }) {
     return (

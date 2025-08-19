@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import FilterBar from "./FilterBar";
 import UserMenu from "./UserMenu";
+import Notification from "./navbar-components/Notification";
 
 export default function Navbar() {
     const path = usePathname();
@@ -58,6 +59,24 @@ export default function Navbar() {
                         <span className="text-white bg-red absolute top-0 -translate-y-[50%] right-0 text-xs font-primary font-medium px-1 translate-x-2 border-3 border-white rounded-full">
                             2
                         </span>
+
+                        <div className="absolute left-1/2 -translate-x-1/2 top-[74px] w-[320px] max-h-[260px] no-scrollbar bg-white shadow-[0_0_27px_rgba(0,0,0,0.08)] rounded-[18px] overflow-auto">
+                            <Notification
+                                title="Project added"
+                                time="8m"
+                                description="Lorum ipsum dolor sit amet was added to your projects list."
+                            />
+                            <Notification
+                                title="Project added"
+                                time="8m"
+                                description="Lorum ipsum dolor sit amet was added to your projects list."
+                            />
+                            <Notification
+                                title="Project added"
+                                time="8m"
+                                description="Lorum ipsum dolor sit amet was added to your projects list."
+                            />
+                        </div>
                     </span>
                     <div className="relative">
                         <div

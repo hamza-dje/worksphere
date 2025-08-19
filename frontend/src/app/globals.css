@@ -48,12 +48,21 @@
 		@apply px-[26px] py-[18px] max-sm:px-5 max-sm:text-sm text-[18px] cursor-pointer border-1 border-[rgba(31,31,31,0.1)] rounded-[18px] focus:outline-none focus:cursor-text focus:shadow-[0_0_26px_0_rgba(0,0,0,0.08)] focus:border-white duration-200 transition-all focus:placeholder:opacity-0 invalid:!border-red invalid:bg-[rgba(244,67,54,0.05)]
 	}
 
-	input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+	input[type="number"]::-webkit-inner-spin-button,
+	input[type="number"]::-webkit-outer-spin-button {
 		appearance: none;
+	}
+
+	input[type="number"] {
+		-moz-appearance: textfield;
 	}
 	
 	::placeholder {
 		@apply font-medium text-[18px] text-black opacity-20
+	}
+
+	::selection {
+		@apply bg-[oklch(from_var(--color-dark-primary)_l_c_h_/_0.25)]
 	}
 }
 
@@ -64,6 +73,10 @@
 
 	.normal-button {
 		@apply font-primary font-bold text-white bg-primary py-3 rounded-[14px] hover:-translate-y-2 hover:drop-shadow-[0_10px_4px_rgba(0,0,0,0.15)] duration-200 transition-[translate_shadow] cursor-pointer focus:bg-dark-primary px-[23px] max-md:px-4 max-md:text-sm max-md:py-3
+	}
+
+	.no-scrollbar {
+		scrollbar-width: none;
 	}
 }
 
