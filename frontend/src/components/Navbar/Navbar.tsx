@@ -4,13 +4,20 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import FilterBar from "./FilterBar";
-import UserMenu from "./UserMenu";
-import Notification from "./navbar-components/Notification";
+import UserMenu from "./navbar-components/user-menu/UserMenu";
+import NotificationContainer from "./navbar-components/notifications/NotificationsContainer";
+import { MenuShownType } from "@/utils/types";
+import MessagesContainer from "./navbar-components/messages/MessagesContainer";
 
 export default function Navbar() {
     const path = usePathname();
-    const [userMenuShown, setUserMenuShown] = useState<boolean>(false);
     const [navbarHeight, setNavbarHeight] = useState<number>(84);
+    const [menuShown, setMenuShown] = useState<MenuShownType>({
+        messagesMenu: false,
+        notificationMenu: false,
+        userMenu: false
+    });
+
     const headerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -38,50 +45,117 @@ export default function Navbar() {
                 </Link>
 
                 <div className="flex items-center gap-5 [&>span>img]:hover:drop-shadow-[0_0_6px_rgba(0,0,0,0.2)] [&>span>img]:cursor-pointer">
+                    {/* Messages */}
                     <span className="relative">
                         <img
                             src="/navbar/msg.svg"
                             alt="Messages"
                             className="h-[30px] duration-150 transition"
                             loading="eager"
+                            onClick={() => setMenuShown(m => ({
+                                messagesMenu: !m.messagesMenu,
+                                notificationMenu: false,
+                                userMenu: false
+                            }))}
                         />
-                        <span className="text-white bg-red absolute top-0 -translate-y-[50%] right-0 text-xs font-primary font-medium px-1 translate-x-2 border-3 border-white rounded-full">
+                        <span className="text-white bg-red absolute top-0 -translate-y-[50%] right-0 text-xs font-primary font-medium px-[5px] py-[1px] translate-x-2 border-3 border-white rounded-full">
                             2
                         </span>
+
+                        <MessagesContainer
+                            messagesShown={menuShown.messagesMenu}
+                            messages={[
+                                {
+                                    message: "message message message message message message",
+                                    user: {
+                                        fullname: "Hamza Djedidi",
+                                        image: "image"
+                                    },
+                                    time: "5m",
+                                    newMessage: true,
+                                    messagesCount: 2
+                                },
+                                {
+                                    message: "message message message message message message",
+                                    user: {
+                                        fullname: "Hamza Djedidi",
+                                        image: "image"
+                                    },
+                                    time: "5m"
+                                },
+                                {
+                                    message: "message message message message message message",
+                                    user: {
+                                        fullname: "Hamza Djedidi",
+                                        image: "image"
+                                    },
+                                    time: "5m"
+                                },
+                                {
+                                    message: "message message message message message message",
+                                    user: {
+                                        fullname: "Hamza Djedidi",
+                                        image: "image"
+                                    },
+                                    time: "5m"
+                                }
+                            ]}
+                            setMenuShown={setMenuShown}
+                        />
                     </span>
-                    <span className="relative sm:mr-4">
+
+                    {/* Notifications */}
+                    <span
+                        className="relative sm:mr-4"
+                    >
                         <img
                             src="/navbar/bell.svg"
                             alt="Notifications"
                             className="h-[30px] duration-150 transition"
                             loading="eager"
+                            onClick={() => setMenuShown(m => ({
+                                messagesMenu: false,
+                                notificationMenu: !m.notificationMenu,
+                                userMenu: false
+                            }))}
                         />
-                        <span className="text-white bg-red absolute top-0 -translate-y-[50%] right-0 text-xs font-primary font-medium px-1 translate-x-2 border-3 border-white rounded-full">
+                        <span className="text-white bg-red absolute top-0 -translate-y-[50%] right-0 text-xs font-primary font-medium px-[5px] py-[1px] translate-x-2 border-3 border-white rounded-full">
                             2
                         </span>
 
-                        <div className="absolute left-1/2 -translate-x-1/2 top-[74px] w-[320px] max-h-[260px] no-scrollbar bg-white shadow-[0_0_27px_rgba(0,0,0,0.08)] rounded-[18px] overflow-auto">
-                            <Notification
-                                title="Project added"
-                                time="8m"
-                                description="Lorum ipsum dolor sit amet was added to your projects list."
-                            />
-                            <Notification
-                                title="Project added"
-                                time="8m"
-                                description="Lorum ipsum dolor sit amet was added to your projects list."
-                            />
-                            <Notification
-                                title="Project added"
-                                time="8m"
-                                description="Lorum ipsum dolor sit amet was added to your projects list."
-                            />
-                        </div>
+                        <NotificationContainer
+                            notifications={[
+                                {
+                                    title: "Project added",
+                                    time: "5m",
+                                    description: "Lorum ipsum dolor sit amet was added to your projects list.",
+                                    notChecked: true
+                                },
+                                {
+                                    title: "Project added",
+                                    time: "5m",
+                                    description: "Lorum ipsum dolor sit amet was added to your projects list."
+                                },
+                                {
+                                    title: "Project added",
+                                    time: "5m",
+                                    description: "Lorum ipsum dolor sit amet was added to your projects list."
+                                }
+                            ]}
+                            notificationsShown={menuShown.notificationMenu}
+                            setMenuShown={setMenuShown}
+                        />
                     </span>
+
+                    {/* User */}
                     <div className="relative">
                         <div
                             className="flex items-center gap-[18px] cursor-pointer"
-                            onClick={() => setUserMenuShown(u => !u)}
+                            onClick={() => setMenuShown(m => ({
+                                messagesMenu: false,
+                                notificationMenu: false,
+                                userMenu: !m.userMenu
+                            }))}
                         >
                             <div className="w-[44px] aspect-square rounded-full bg-primary"></div>
                             <div className="flex flex-col max-md:hidden">
@@ -93,8 +167,8 @@ export default function Navbar() {
                         </div>
 
                         <UserMenu
-                            userMenuShown={userMenuShown}
-                            setUserMenuShown={setUserMenuShown}
+                            userMenuShown={menuShown.userMenu}
+                            setMenuShown={setMenuShown}
                         />
                     </div>
                 </div>

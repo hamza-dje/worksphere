@@ -1,7 +1,14 @@
 import { SetStateAction } from "react";
-import MenuButton from "./navbar-components/MenuButton";
+import MenuButton from "./MenuButton";
+import { MenuShownType } from "@/utils/types";
 
-export default function UserMenu({ userMenuShown, setUserMenuShown }: { userMenuShown: boolean, setUserMenuShown: React.Dispatch<SetStateAction<boolean>> }) {
+export default function UserMenu({
+    userMenuShown,
+    setMenuShown
+}: {
+    userMenuShown: boolean,
+    setMenuShown: React.Dispatch<SetStateAction<MenuShownType>>
+}) {
     return (
         <div
             className={`absolute top-[80px] lg:right-[50%] max-lg:right-0 lg:translate-x-[50%] w-[360px] grid grid-cols-2 gap-x-2.5 max-sm:pl-12 max-sm:w-screen ${userMenuShown
@@ -31,8 +38,12 @@ export default function UserMenu({ userMenuShown, setUserMenuShown }: { userMenu
                 href="logout"
             />
             <button
-                onClick={() => setUserMenuShown(u => !u)}
-                className="font-primary text-[11px] opacity-20 cursor-pointer hover:opacity-100 px-2 py-1 absolute right-1 -bottom-8 duration-200 transition-opacity"
+                onClick={() => setMenuShown(m => ({
+                    messagesMenu: false,
+                    notificationMenu: false,
+                    userMenu: !m.userMenu
+                }))}
+                className="small-menu-button absolute right-1 -bottom-8"
             >
                 Close
             </button>

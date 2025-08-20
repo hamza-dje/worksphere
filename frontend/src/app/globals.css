@@ -75,6 +75,10 @@
 		@apply font-primary font-bold text-white bg-primary py-3 rounded-[14px] hover:-translate-y-2 hover:drop-shadow-[0_10px_4px_rgba(0,0,0,0.15)] duration-200 transition-[translate_shadow] cursor-pointer focus:bg-dark-primary px-[23px] max-md:px-4 max-md:text-sm max-md:py-3
 	}
 
+	.small-menu-button {
+		@apply font-primary text-[11px] text-[oklch(from_var(--color-black)_l_c_h_/_0.2)] cursor-pointer hover:text-black px-2 py-1 duration-200 transition-[color] bg-[oklch(from_var(--color-white)_l_c_h_/_0.9)] rounded-full
+	}
+
 	.no-scrollbar {
 		scrollbar-width: none;
 	}

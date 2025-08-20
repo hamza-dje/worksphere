@@ -1,4 +1,4 @@
-import BidDialogButton from "./BidDialogButton";
+import OverlayButton from "./OverlayButton";
 
 interface ClientNeedCardProps {
     title: string;
@@ -59,16 +59,75 @@ export default function ClientNeedCard({ title, priceRange, category, time, bids
                 </div>
 
                 <div className="flex gap-[18px] max-md:gap-2">
-                    <button className="normal-button border-2 border-red bg-transparent opacity-30 hover:opacity-100 max-sm:py-0">
-                        <span className="max-sm:hidden font-primary font-bold text-red flex items-center gap-2">
-                            Report
-                            <div className="w-3.5 aspect-square rounded-full border-[1.5px] border-red h-fit relative">
-                                <span className="text-red absolute left-[50%] top-[50%] -translate-[50%] font-extrabold text-[10px]">!</span>
-                            </div>
-                        </span>
-                        <span className="sm:hidden font-extrabold text-red text-lg">!</span>
-                    </button>
-                    <BidDialogButton />
+                    <OverlayButton
+                        openOverlayButton={
+                            <button className="normal-button border-2 border-red bg-transparent opacity-30 hover:opacity-100 max-sm:py-0">
+                                <span className="max-sm:hidden font-primary font-bold text-red flex items-center gap-2">
+                                    Report
+                                    <div className="w-3.5 aspect-square rounded-full border-[1.5px] border-red h-fit relative">
+                                        <span className="text-red absolute left-[50%] top-[50%] -translate-[50%] font-extrabold text-[10px]">!</span>
+                                    </div>
+                                </span>
+                                <span className="sm:hidden font-extrabold text-red text-lg">!</span>
+                            </button>
+                        }
+                        overlayContent={
+                            <textarea
+                                name="reason"
+                                placeholder="Reason why?"
+                                rows={4}
+                                className="resize-none w-full"
+                            />
+                        }
+                        cancelButtonContent="Cancel reporting!"
+                        confirmButton={
+                            <button className="normal-button bg-red">
+                                Report
+                            </button>
+                        }
+                    />
+                    {/* <BidDialogButton /> */}
+                    <OverlayButton
+                        openOverlayButton={
+                            <button className="normal-button">
+                                Place a bid
+                            </button>
+                        }
+                        mainClassName="grid grid-cols-2 gap-5"
+                        overlayContent={
+                            <>
+                                <textarea name="" id="" className="resize-none col-span-2" rows={3} placeholder="Description" />
+                                <div className="relative">
+                                    <input
+                                        type="number"
+                                        name="price"
+                                        id="price"
+                                        placeholder="Suggested price"
+                                        className="peer w-full not-placeholder-shown:font-primary not-placeholder-shown:font-bold"
+                                    />
+                                    <label htmlFor="price" className="peer-placeholder-shown:hidden font-primary font-bold absolute right-[18px] top-[50%] -translate-y-[50%] text-lg">$</label>
+                                </div>
+                                <div className="relative">
+                                    <input
+                                        type="number"
+                                        name="revision-fee"
+                                        id=""
+                                        placeholder="Revision fee"
+                                        className="peer w-full not-placeholder-shown:font-primary not-placeholder-shown:font-bold"
+                                    />
+                                    <label htmlFor="revision-fee" className="peer-placeholder-shown:hidden font-primary font-bold absolute right-[18px] top-[50%] -translate-y-[50%] text-lg">%</label>
+                                </div>
+                            </>
+                        }
+                        cancelButtonContent="Cancel editing!"
+                        confirmButton={
+                            <button
+                                className="normal-button max-sm:text-xs"
+                            >
+                                Finish applying
+                            </button>
+                        }
+                    />
                 </div>
             </div>
         </div>

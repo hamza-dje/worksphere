@@ -1,4 +1,4 @@
-import AuthButton from "@/components/AuthButton";
+import AuthButton from "@/components/Auth/AuthButton";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
