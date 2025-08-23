@@ -24,12 +24,22 @@ export type MenuShownType = {
 
 export type MessageProps = {
     user: {
-        fullname: string;
-        image: string;
-    };
-    message: string;
-    time: string;
+        fullname: string,
+        image: string
+    },
+    message: string,
+    time: string
 } & (
         { newMessage?: undefined; messagesCount?: undefined }
         | { newMessage: boolean; messagesCount: number }
+    );
+
+export type SideButtonProps = {
+    icon: React.ReactElement<React.SVGProps<SVGSVGElement>>,
+    name: string,
+    customColor?: string,
+    href?: string
+} & (
+        { hasChildren?: undefined, childrenButtons?: undefined }
+        | { hasChildren: true, childrenButtons: Array<{ icon: React.ReactElement<React.SVGProps<SVGSVGElement>>, name: string, href: string }> }
     );

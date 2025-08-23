@@ -36,6 +36,10 @@
 }
 
 @layer base {
+	body {
+		background-color: var(--color-white);
+	}
+
 	h1 {
 		@apply text-[36px] font-primary font-extrabold max-sm:text-3xl
 	}
@@ -84,6 +88,8 @@
 	}
 }
 
-body {
-	background-color: var(--color-white);
+@layer utilities {
+	.shadow {
+		@apply shadow-[0_0_27px_rgba(0,0,0,0.08)];
+	}
 }

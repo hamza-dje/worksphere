@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import FilterBar from "./FilterBar";
-import UserMenu from "./navbar-components/user-menu/UserMenu";
-import NotificationContainer from "./navbar-components/notifications/NotificationsContainer";
 import { MenuShownType } from "@/utils/types";
 import MessagesContainer from "./navbar-components/messages/MessagesContainer";
+import NotificationContainer from "./navbar-components/notifications/NotificationsContainer";
+import UserMenu from "./navbar-components/user-menu/UserMenu";
 
 export default function Navbar() {
     const path = usePathname();
