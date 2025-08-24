@@ -30,10 +30,10 @@ export default function SideButton(props: SideButtonProps) {
     if (props.hasChildren && props.childrenButtons) return (
         <div>
             <button
-                className={`relative z-[1] flex items-center gap-4 w-full text-sm font-primary font-bold px-6 py-3.5 border-1 rounded-[18px] hover:border-transparent duration-200 transition-[background_shadow] cursor-pointer
+                className={`relative z-[1] flex items-center gap-4 w-full text-sm font-primary font-bold px-6 py-3.5 rounded-[18px] border-1 border-transparent duration-200 transition-shadow cursor-pointer group
                     ${menuExpanded || childHasActiveLink
-                        ? 'text-white border-transparent bg-primary shadow-[0_5px_10px_rgba(0,0,0,0.15)]'
-                        : 'text-primary border-[oklch(from_var(--color-primary)_l_c_h_/_0.15)] hover:bg-[oklch(from_var(--color-primary)_l_c_h_/_.15)]'
+                        ? 'text-white shadow-[0_5px_10px_rgba(0,0,0,0.15)]'
+                        : 'text-primary'
                     }`}
                 onClick={() => props.setSubMenuShown(s =>
                     s[props.index]
@@ -41,6 +41,12 @@ export default function SideButton(props: SideButtonProps) {
                         : (s.map((_, i) => props.index === i) as typeof s)
                 )}
             >
+                <div className="absolute left-0 top-0 w-full h-full rounded-[18px] bg-white -z-10 border-1 border-transparent" />
+                <div className={`absolute left-0 top-0 w-full h-full rounded-[18px] -z-10 border-1 transition-colors duration-200
+                    ${menuExpanded || childHasActiveLink
+                        ? 'border-transparent bg-primary'
+                        : 'border-[oklch(from_var(--color-primary)_l_c_h_/_0.15)] group-hover:bg-[oklch(from_var(--color-primary)_l_c_h_/_.15)] group-hover:border-transparent'
+                    }`} />
                 {cloneIcon(props.icon)}
                 {props.name}
             </button>
