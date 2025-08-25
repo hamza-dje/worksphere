@@ -30,7 +30,7 @@ export default function SideButton(props: SideButtonProps) {
     if (props.hasChildren && props.childrenButtons) return (
         <div>
             <button
-                className={`relative z-[1] flex items-center gap-4 w-full text-sm font-primary font-bold px-6 py-3.5 rounded-[18px] border-1 border-transparent duration-200 transition-shadow cursor-pointer group
+                className={`relative z-[1] flex items-center gap-4 w-full text-sm font-primary font-bold px-[25px] py-[15px] rounded-[18px] duration-200 transition-shadow cursor-pointer group
                     ${menuExpanded || childHasActiveLink
                         ? 'text-white shadow-[0_5px_10px_rgba(0,0,0,0.15)]'
                         : 'text-primary'

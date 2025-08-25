@@ -68,6 +68,22 @@
 	::selection {
 		@apply bg-[oklch(from_var(--color-dark-primary)_l_c_h_/_0.25)]
 	}
+
+	table tbody tr {
+		@apply relative after:content-[""] after:absolute after:top-0 after:-inset-4 after:h-full hover:after:bg-[oklch(from_var(--color-primary)_l_c_h_/_.1)] after:rounded-full after:transition-colors after:duration-200
+	}
+
+	table th {
+		@apply font-primary font-normal text-[10px] text-start opacity-40 pt-1
+	}
+
+	table td {
+		@apply font-primary text-xs py-2 text-nowrap
+	}
+
+	table td:not(:last-child) {
+		@apply pr-5
+	}
 }
 
 @layer components {
