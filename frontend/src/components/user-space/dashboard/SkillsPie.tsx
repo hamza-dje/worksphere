@@ -15,7 +15,7 @@ export default function SkillsPie(
             className="lg:row-span-2 sm:max-lg:col-span-2"
         >
             <div className="flex lg:flex-col flex-1 lg:mt-5 lg:justify-between max-sm:justify-between max-lg:justify-evenly items-center">
-                <div className="w-fit lg:mx-auto">
+                <div className="w-fit lg:mx-auto max-sm:pr-5">
                     <DonutArcs
                         data={skills.map(skill => Object.values(skill)[0]) as [number, number, number]}
                         gapDeg={24}
@@ -24,7 +24,7 @@ export default function SkillsPie(
                         colors={colors as [string, string, string]}
                     />
                 </div>
-                <div className="flex flex-col lg:w-full lg:gap-2.5 max-lg:justify-evenly max-lg:h-full">
+                <div className="flex flex-col lg:w-full lg:gap-2.5 max-lg:justify-evenly max-lg:h-full max-lg:w-1/3 max-sm:w-2/3">
                     {
                         skills.map((skill, i) => {
                             const [name, value] = Object.entries(skill)[0];

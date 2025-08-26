@@ -11,25 +11,15 @@ import UserMenu from "./navbar-components/user-menu/UserMenu";
 
 export default function Navbar() {
     const path = usePathname();
-    const [navbarHeight, setNavbarHeight] = useState<number>(84);
     const [menuShown, setMenuShown] = useState<MenuShownType>({
         messagesMenu: false,
         notificationMenu: false,
         userMenu: false
     });
 
-    const headerRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        if (headerRef.current) {
-            setNavbarHeight(headerRef.current.offsetHeight);
-        }
-    }, [headerRef.current]);
-
     return (
         <>
             <header
-                ref={headerRef}
                 className="z-10 w-full py-5 shadow-[0_0_27px_rgba(0,0,0,0.08)] rounded-b-[36px] flex justify-between px-[140px] max-lg:px-[60px] max-sm:px-6 sticky top-0 right-0 left-0 bg-white"
             >
                 <Link href="/">
@@ -46,65 +36,68 @@ export default function Navbar() {
 
                 <div className="flex items-center gap-5 [&>span>span>img]:hover:drop-shadow-[0_0_6px_rgba(0,0,0,0.2)] [&>span>span>img]:cursor-pointer">
                     {/* Messages */}
-                    <span className="sm:relative">
-                        <span className="relative">
-                            <img
-                                src="/navbar/msg.svg"
-                                alt="Messages"
-                                className="h-[30px] duration-150 transition"
-                                loading="eager"
-                                onClick={() => setMenuShown(m => ({
-                                    messagesMenu: !m.messagesMenu,
-                                    notificationMenu: false,
-                                    userMenu: false
-                                }))}
-                            />
-                            <span className="text-white bg-red absolute top-0 -translate-y-[50%] right-0 text-xs font-primary font-medium px-[5px] py-[1px] translate-x-2 border-3 border-white rounded-full">
-                                2
+                    {
+                        path !== '/inbox' &&
+                        <span className="sm:relative">
+                            <span className="relative">
+                                <img
+                                    src="/navbar/msg.svg"
+                                    alt="Messages"
+                                    className="h-[30px] duration-150 transition"
+                                    loading="eager"
+                                    onClick={() => setMenuShown(m => ({
+                                        messagesMenu: !m.messagesMenu,
+                                        notificationMenu: false,
+                                        userMenu: false
+                                    }))}
+                                />
+                                <span className="text-white bg-red absolute top-0 -translate-y-[50%] right-0 text-xs font-primary font-medium px-[5px] py-[1px] translate-x-2 border-3 border-white rounded-full">
+                                    2
+                                </span>
                             </span>
-                        </span>
 
-                        <MessagesContainer
-                            messagesShown={menuShown.messagesMenu}
-                            messages={[
-                                {
-                                    message: "message message message message message message",
-                                    user: {
-                                        fullname: "Hamza Djedidi",
-                                        image: "image"
+                            <MessagesContainer
+                                messagesShown={menuShown.messagesMenu}
+                                messages={[
+                                    {
+                                        message: "message message message message message message",
+                                        user: {
+                                            fullname: "Hamza Djedidi",
+                                            image: "image"
+                                        },
+                                        time: "5m",
+                                        newMessage: true,
+                                        messagesCount: 2
                                     },
-                                    time: "5m",
-                                    newMessage: true,
-                                    messagesCount: 2
-                                },
-                                {
-                                    message: "message message message message message message",
-                                    user: {
-                                        fullname: "Hamza Djedidi",
-                                        image: "image"
+                                    {
+                                        message: "message message message message message message",
+                                        user: {
+                                            fullname: "Hamza Djedidi",
+                                            image: "image"
+                                        },
+                                        time: "5m"
                                     },
-                                    time: "5m"
-                                },
-                                {
-                                    message: "message message message message message message",
-                                    user: {
-                                        fullname: "Hamza Djedidi",
-                                        image: "image"
+                                    {
+                                        message: "message message message message message message",
+                                        user: {
+                                            fullname: "Hamza Djedidi",
+                                            image: "image"
+                                        },
+                                        time: "5m"
                                     },
-                                    time: "5m"
-                                },
-                                {
-                                    message: "message message message message message message",
-                                    user: {
-                                        fullname: "Hamza Djedidi",
-                                        image: "image"
-                                    },
-                                    time: "5m"
-                                }
-                            ]}
-                            setMenuShown={setMenuShown}
-                        />
-                    </span>
+                                    {
+                                        message: "message message message message message message",
+                                        user: {
+                                            fullname: "Hamza Djedidi",
+                                            image: "image"
+                                        },
+                                        time: "5m"
+                                    }
+                                ]}
+                                setMenuShown={setMenuShown}
+                            />
+                        </span>
+                    }
 
                     {/* Notifications */}
                     <span
@@ -180,7 +173,7 @@ export default function Navbar() {
                 </div>
             </header>
             {
-                path === '/' && <FilterBar navbarHeight={navbarHeight} />
+                path === '/' && <FilterBar />
             }
         </>
     );

@@ -45,7 +45,7 @@
 	}
 
 	* {
-		@apply text-black font-secondary
+		@apply text-black font-secondary [scrollbar-color:_oklch(from_var(--color-primary)_l_c_h_/_.5)_var(--color-white)]
 	}
 
 	textarea, input, select {
@@ -93,6 +93,10 @@
 
 	.normal-button {
 		@apply font-primary font-bold text-white bg-primary py-3 rounded-[14px] hover:-translate-y-2 hover:drop-shadow-[0_10px_4px_rgba(0,0,0,0.15)] duration-200 transition-[translate_shadow] cursor-pointer focus:bg-dark-primary px-[23px] max-md:px-4 max-md:text-sm max-md:py-3
+	}
+
+	.stroke-button {
+		@apply border-2 font-primary font-bold border-red text-red bg-transparent opacity-30 hover:-translate-y-2 hover:opacity-100 py-3 rounded-[14px] duration-200 transition-[translate_shadow] cursor-pointer px-[23px] hover:drop-shadow-[0_10px_4px_rgba(0,0,0,0.15)]
 	}
 
 	.small-menu-button {

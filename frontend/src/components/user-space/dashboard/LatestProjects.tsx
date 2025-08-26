@@ -1,12 +1,13 @@
+"use client";
 import { formatValue } from "@/utils/functions";
 import CardWrapper from "../CardWrapper";
 import StatusLabel from "../StatusLabel";
+import { useRouter } from "next/navigation";
+import { ProjectsType } from "@/utils/types";
 
-export default function LatestProjects({
-    projects
-}: {
-    projects: Array<{ name: string, status: 'Done' | 'Pending' | 'Late', type: 'Service' | 'Need', date: string, deadline: string, cost: number, client: string }>
-}) {
+export default function LatestProjects({ projects }: ProjectsType) {
+    const router = useRouter();
+
     return (
         <CardWrapper
             header="Latest Projects"
@@ -27,7 +28,11 @@ export default function LatestProjects({
                 <tbody>
                     {
                         projects.map((project, i) =>
-                            <tr key={i}>
+                            <tr
+                                key={i}
+                                className="cursor-pointer"
+                                onClick={() => router.push(project.status === 'Done' ? '/history' : '/working-on')}
+                            >
                                 <td className="truncate block w-[200px]">{project.name}</td>
                                 <td><StatusLabel status={project.status} /></td>
                                 <td className="opacity-60">{project.type}</td>

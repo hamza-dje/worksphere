@@ -1,10 +1,9 @@
 import { MessageProps } from "@/utils/types";
-import Image from "next/image";
 
-export default function MessageNotification(props: MessageProps) {
+export default function UserMessage(props: MessageProps) {
     return (
         <div className={`p-4 cursor-pointer ${props.newMessage ? 'bg-[oklch(from_var(--color-primary)_l_c_h_/_0.15)] hover:bg-[oklch(from_var(--color-primary)_l_c_h_/_0.25)]' : 'hover:bg-[oklch(from_var(--color-primary)_l_c_h_/_0.08)]'} duration-200 transition-colors group`}>
-            <div className="flex gap-2 items-center group-hover:-translate-y-1 duration-200 transition-transform">
+            <div className="flex gap-3 items-center group-hover:-translate-y-1 duration-200 transition-transform">
                 <div className="w-12 aspect-square bg-primary rounded-full flex-shrink-0" />
                 <div className={`flex flex-1 flex-col ${props.newMessage ? '' : 'gap-1'} min-w-0`}>
                     <div className="flex justify-between">
@@ -18,7 +17,7 @@ export default function MessageNotification(props: MessageProps) {
                     {
                         props.newMessage
                             ? <>
-                                <span className="truncate text-xs block opacity-40 flex-shrink mb-2">
+                                <span className="truncate text-xs block opacity-40 flex-shrink mb-2 font-bold">
                                     {props.message}
                                 </span>
                                 <div className="flex justify-between items-center">

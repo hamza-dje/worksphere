@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function FilterBar({ navbarHeight }: { navbarHeight: number }) {
+export default function FilterBar() {
     const [makeVisible, setMakeVisible] = useState<boolean>(true);
     const [filterShown, setFilterShown] = useState<boolean>(false);
     const [filterFixed, setFilterFixed] = useState<boolean>(false);
@@ -27,10 +27,7 @@ export default function FilterBar({ navbarHeight }: { navbarHeight: number }) {
 
     return (
         <div
-            className="sticky z-9 max-md:w-[calc(100%-16px)] mx-auto sm:h-[60px] group"
-            style={{
-                top: `${navbarHeight}px`
-            }}
+            className="sticky z-9 max-md:w-[calc(100%-16px)] mx-auto sm:h-[60px] group top-[84px]"
         >
             <div
                 className={`max-sm:absolute ${makeVisible || filterFixed ? 'sm:-translate-y-4 sm:max-xl:-translate-y-5' : 'sm:opacity-0 sm:-translate-y-full'} sm:group-hover:-translate-y-4 sm:max-xl:group-hover:-translate-y-5 max-sm:-translate-y-5 sm:group-hover:opacity-100 max-sm:w-full max-sm:flex max-sm:flex-col max-sm:gap-4 transition-[top_translate_opacity] duration-[250ms] ease-out ${filterShown ? 'max-sm:top-0' : 'max-sm:-top-[320px]'}`}
