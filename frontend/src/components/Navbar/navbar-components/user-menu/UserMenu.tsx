@@ -4,10 +4,10 @@ import { MenuShownType } from "@/utils/types";
 
 export default function UserMenu({
     userMenuShown,
-    setMenuShown
+    setUserShown
 }: {
     userMenuShown: boolean,
-    setMenuShown: React.Dispatch<SetStateAction<MenuShownType>>
+    setUserShown: () => void
 }) {
     return (
         <div
@@ -38,11 +38,7 @@ export default function UserMenu({
                 href="logout"
             />
             <button
-                onClick={() => setMenuShown(m => ({
-                    messagesMenu: false,
-                    notificationMenu: false,
-                    userMenu: !m.userMenu
-                }))}
+                onClick={() => setUserShown()}
                 className="small-menu-button absolute right-1 -bottom-8"
             >
                 Close

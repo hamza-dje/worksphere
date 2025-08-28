@@ -88,11 +88,12 @@ export default function Sidebar() {
         }
     ];
 
-    const insightsSideButtons: SideButtonProps[] = [
+    const otherSideButtons: SideButtonProps[] = [
         {
             icon: <InboxIcon />,
             name: "Inbox",
-            customColor: "var(--color-blue)"
+            customColor: "var(--color-blue)",
+            href: "/inbox"
         },
         {
             icon: <LogOutIcon />,
@@ -113,9 +114,9 @@ export default function Sidebar() {
                 </nav>
             </div>
             <div>
-                <h4 className="font-primary text-xs opacity-20 ml-5 mb-1">Insights</h4>
+                <h4 className="font-primary text-xs opacity-20 ml-5 mb-1">Other</h4>
                 <nav className="flex flex-col gap-2.5">
-                    {insightsSideButtons.map((insightsSideButton, i) => <SideButton key={`insights-${i}`} {...insightsSideButton} />)}
+                    {otherSideButtons.map((otherSideButton, i) => <SideButton key={`other-${i}`} {...otherSideButton} />)}
                 </nav>
             </div>
         </div>

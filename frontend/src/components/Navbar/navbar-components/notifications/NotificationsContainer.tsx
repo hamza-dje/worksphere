@@ -1,15 +1,15 @@
-import { MenuShownType, NotificationProps } from "@/utils/types";
+import { MenuShownType, NavbarReducerAction, NotificationProps } from "@/utils/types";
 import Notification from "./Notification";
 import { SetStateAction } from "react";
 
 export default function NotificationContainer({
     notifications,
     notificationsShown,
-    setMenuShown
+    setNotificationsShown
 }: {
     notifications: NotificationProps[],
     notificationsShown: boolean,
-    setMenuShown: React.Dispatch<SetStateAction<MenuShownType>>
+    setNotificationsShown: () => void
 }) {
     const hasNotifications = notifications.length > 0;
 
@@ -36,11 +36,7 @@ export default function NotificationContainer({
                 }
                 <button
                     className="small-menu-button"
-                    onClick={() => setMenuShown(m => ({
-                        messagesMenu: false,
-                        notificationMenu: !m.notificationMenu,
-                        userMenu: false
-                    }))}
+                    onClick={() => setNotificationsShown()}
                 >
                     Close
                 </button>

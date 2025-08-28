@@ -11,6 +11,10 @@ export type ClientNeedCardProps = {
     clientName: string
 };
 
+export type NavbarReducerAction = {
+    type: 'toggleMessages' | 'toggleNotifications' | 'toggleUser'
+};
+
 export type NotificationProps = {
     title: string,
     time: string,

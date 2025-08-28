@@ -6,11 +6,11 @@ import Link from "next/link";
 export default function MessagesContainer({
     messages,
     messagesShown,
-    setMenuShown
+    setMessagesShown
 }: {
     messages: MessageProps[],
     messagesShown: boolean,
-    setMenuShown: React.Dispatch<SetStateAction<MenuShownType>>
+    setMessagesShown: () => void
 }) {
     const hasMessages = messages.length > 0;
 
@@ -39,11 +39,7 @@ export default function MessagesContainer({
             <div className={`flex justify-end px-2`}>
                 <button
                     className="small-menu-button"
-                    onClick={() => setMenuShown(m => ({
-                        messagesMenu: !m.messagesMenu,
-                        notificationMenu: false,
-                        userMenu: false
-                    }))}
+                    onClick={() => setMessagesShown()}
                 >
                     Close
                 </button>

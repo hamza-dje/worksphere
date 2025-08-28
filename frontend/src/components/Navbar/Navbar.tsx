@@ -1,17 +1,41 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useReducer } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import FilterBar from "./FilterBar";
-import { MenuShownType } from "@/utils/types";
+import { MenuShownType, NavbarReducerAction } from "@/utils/types";
 import MessagesContainer from "./navbar-components/messages/MessagesContainer";
 import NotificationContainer from "./navbar-components/notifications/NotificationsContainer";
 import UserMenu from "./navbar-components/user-menu/UserMenu";
 
+
+type MenuKey = keyof MenuShownType;
+
 export default function Navbar() {
     const path = usePathname();
-    const [menuShown, setMenuShown] = useState<MenuShownType>({
+
+    const toggleMenu = (state: MenuShownType, key: MenuKey): MenuShownType => {
+        const isOpen = state[key];
+        return {
+            messagesMenu: false,
+            notificationMenu: false,
+            userMenu: false,
+            [key]: !isOpen,
+        };
+    }
+    const reducer = (state: MenuShownType, action: NavbarReducerAction) => {
+        switch (action.type) {
+            case "toggleMessages":
+                return toggleMenu(state, "messagesMenu");
+            case "toggleNotifications":
+                return toggleMenu(state, "notificationMenu");
+            case "toggleUser":
+                return toggleMenu(state, "userMenu");
+            default:
+                return state;
+        }
+    };
+    const [state, dispatch] = useReducer(reducer, {
         messagesMenu: false,
         notificationMenu: false,
         userMenu: false
@@ -44,11 +68,7 @@ export default function Navbar() {
                                 alt="Messages"
                                 className="h-[30px] duration-150 transition"
                                 loading="eager"
-                                onClick={() => setMenuShown(m => ({
-                                    messagesMenu: !m.messagesMenu,
-                                    notificationMenu: false,
-                                    userMenu: false
-                                }))}
+                                onClick={() => dispatch({ type: 'toggleMessages' })}
                             />
                             <span className="text-white bg-red absolute top-0 -translate-y-[50%] right-0 text-xs font-primary font-medium px-[5px] py-[1px] translate-x-2 border-3 border-white rounded-full">
                                 2
@@ -56,7 +76,7 @@ export default function Navbar() {
                         </span>
 
                         <MessagesContainer
-                            messagesShown={menuShown.messagesMenu}
+                            messagesShown={state.messagesMenu}
                             messages={[
                                 {
                                     message: "message message message message message message",
@@ -93,7 +113,7 @@ export default function Navbar() {
                                     time: "5m"
                                 }
                             ]}
-                            setMenuShown={setMenuShown}
+                            setMessagesShown={() => dispatch({ type: 'toggleMessages' })}
                         />
                     </span>
                 }
@@ -110,11 +130,7 @@ export default function Navbar() {
                             alt="Notifications"
                             className="h-[30px] duration-150 transition"
                             loading="eager"
-                            onClick={() => setMenuShown(m => ({
-                                messagesMenu: false,
-                                notificationMenu: !m.notificationMenu,
-                                userMenu: false
-                            }))}
+                            onClick={() => dispatch({ type: 'toggleNotifications' })}
                         />
                         <span className="text-white bg-red absolute top-0 -translate-y-[50%] right-0 text-xs font-primary font-medium px-[5px] py-[1px] translate-x-2 border-3 border-white rounded-full">
                             2
@@ -140,8 +156,8 @@ export default function Navbar() {
                                 description: "Lorum ipsum dolor sit amet was added to your projects list."
                             }
                         ]}
-                        notificationsShown={menuShown.notificationMenu}
-                        setMenuShown={setMenuShown}
+                        notificationsShown={state.notificationMenu}
+                        setNotificationsShown={() => dispatch({ type: 'toggleNotifications' })}
                     />
                 </span>
 
@@ -149,11 +165,7 @@ export default function Navbar() {
                 <div className="sm:relative">
                     <div
                         className="flex items-center gap-[18px] cursor-pointer"
-                        onClick={() => setMenuShown(m => ({
-                            messagesMenu: false,
-                            notificationMenu: false,
-                            userMenu: !m.userMenu
-                        }))}
+                        onClick={() => dispatch({ type: 'toggleUser' })}
                     >
                         <div className="w-[44px] aspect-square rounded-full bg-primary"></div>
                         <div className="flex flex-col max-md:hidden">
@@ -165,8 +177,8 @@ export default function Navbar() {
                     </div>
 
                     <UserMenu
-                        userMenuShown={menuShown.userMenu}
-                        setMenuShown={setMenuShown}
+                        userMenuShown={state.userMenu}
+                        setUserShown={() => dispatch({ type: 'toggleUser' })}
                     />
                 </div>
             </div>
