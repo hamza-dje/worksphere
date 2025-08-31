@@ -4,7 +4,7 @@ export const metadata: Metadata = {
     title: "Inbox"
 };
 
-export default function Inbox() {
+export default function InboxPage() {
     return (
         <div className="font-primary text-sm flex items-center gap-4 m-auto">
             <img

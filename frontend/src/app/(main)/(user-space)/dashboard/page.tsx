@@ -4,7 +4,7 @@ import MyServices from "@/components/user-space/dashboard/MyServices";
 import SkillsPie from "@/components/user-space/dashboard/SkillsPie";
 import NumberCard from "@/components/user-space/NumberCard";
 
-export default function Dashboard() {
+export default function DashboardPage() {
     return (
         <>
             <NumberCard

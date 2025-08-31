@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 	title: 'Login'
 };
 
-export default function Login() {
+export default function LoginPage() {
 	return (
 		<div className="h-screen w-full">
 			<div className="bg-white w-[50%] shadow-[0_0_27px_rgba(0,0,0,0.08)] max-lg:w-full h-full rounded-[0_36px_36px_0] max-lg:rounded-none flex flex-col items-center relative">

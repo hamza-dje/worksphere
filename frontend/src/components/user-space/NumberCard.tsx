@@ -21,8 +21,6 @@ export default function NumberCard({
 }: NumberCardProps) {
     const router = useRouter();
 
-
-
     return (
         <CardWrapper
             header={header}

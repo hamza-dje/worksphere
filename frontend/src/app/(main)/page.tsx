@@ -1,7 +1,7 @@
 import ClientNeedCard from "@/components/ClientNeedCard";
 import FilterBar from "@/components/navbar/FilterBar";
 
-export default function Home() {
+export default function HomePage() {
 	return (
 		<>
 			<FilterBar />

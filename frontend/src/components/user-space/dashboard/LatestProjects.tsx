@@ -5,7 +5,7 @@ import StatusLabel from "../StatusLabel";
 import { useRouter } from "next/navigation";
 import { ProjectsType } from "@/utils/types";
 
-export default function LatestProjects({ projects }: ProjectsType) {
+export default function LatestProjects({ projects }: { projects: ProjectsType }) {
     const router = useRouter();
 
     return (

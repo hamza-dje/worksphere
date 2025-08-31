@@ -70,7 +70,7 @@
 	}
 
 	table tbody tr {
-		@apply relative after:content-[""] after:absolute after:top-0 after:-inset-4 after:h-full hover:after:bg-[oklch(from_var(--color-primary)_l_c_h_/_.1)] after:rounded-full after:transition-colors after:duration-200
+		@apply relative after:content-[""] after:absolute after:top-0 after:-inset-4 after:h-full hover:after:bg-[oklch(from_var(--color-primary)_l_c_h_/_.1)] after:rounded-[16px] after:transition-colors after:duration-200
 	}
 
 	table th {

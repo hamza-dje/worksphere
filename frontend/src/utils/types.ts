@@ -50,14 +50,12 @@ export type SideButtonProps = {
         | { index: number, subMenuShown: [boolean, boolean, boolean], setSubMenuShown: React.Dispatch<SetStateAction<[boolean, boolean, boolean]>>, hasChildren: true, childrenButtons: Array<{ icon: React.ReactElement<React.SVGProps<SVGSVGElement>>, name: string, href: string }> }
     );
 
-export type ProjectsType = {
-    projects: Array<{
-        name: string,
-        status: 'Done' | 'Pending' | 'Late',
-        type: 'Service' | 'Need',
-        date: string,
-        deadline: string,
-        cost: number,
-        client: string
-    }>
-}
+export type ProjectsType = Array<{
+    name: string,
+    status: 'Done' | 'Pending' | 'Late',
+    type: 'Service' | 'Need',
+    date: string,
+    deadline: string,
+    cost: number,
+    client: string
+}>

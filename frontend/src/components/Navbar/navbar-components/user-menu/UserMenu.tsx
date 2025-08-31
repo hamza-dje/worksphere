@@ -1,6 +1,4 @@
-import { SetStateAction } from "react";
 import MenuButton from "./MenuButton";
-import { MenuShownType } from "@/utils/types";
 
 export default function UserMenu({
     userMenuShown,
@@ -18,7 +16,7 @@ export default function UserMenu({
         >
             <MenuButton name="Dashboard" />
             <MenuButton name="Working On" />
-            <MenuButton name="My Services" href="services" />
+            <MenuButton name="My Services" />
             <MenuButton name="Withdraw" />
             <MenuButton name="Profile" />
             <MenuButton name="Account" />
@@ -35,7 +33,6 @@ export default function UserMenu({
                 name="Log Out"
                 className="border-[oklch(from_var(--color-alternative-red)_l_c_h_/_0.15)]! text-alternative-red! hover:shadow-[0_4px_14px_oklch(from_var(--color-alternative-red)_l_c_h_/_0.2)]! hover:border-white! focus:bg-alternative-red! focus:text-white!"
                 imageClassName="bg-alternative-red! group-focus:bg-white!"
-                href="logout"
             />
             <button
                 onClick={() => setUserShown()}
