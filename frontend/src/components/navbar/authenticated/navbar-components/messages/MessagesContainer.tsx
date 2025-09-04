@@ -1,6 +1,5 @@
-import { MenuShownType, MessageProps } from "@/utils/types";
-import { SetStateAction } from "react";
-import MessageNotification from "../../../inbox/UserMessage";
+import UserMessage from "@/components/inbox/UserMessage";
+import { MessageProps } from "@/utils/types";
 import Link from "next/link";
 
 export default function MessagesContainer({
@@ -28,7 +27,7 @@ export default function MessagesContainer({
                 {
                     hasMessages
                         ? messages.map((message, i) =>
-                            <MessageNotification
+                            <UserMessage
                                 key={i}
                                 {...message}
                             />

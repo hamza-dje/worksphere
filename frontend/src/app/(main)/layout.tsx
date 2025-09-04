@@ -1,4 +1,5 @@
-import Navbar from "@/components/navbar/Navbar";
+import Navbar from "@/components/navbar/authenticated/Navbar";
+
 
 export default function MainLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (

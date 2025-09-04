@@ -1,5 +1,5 @@
 import ClientNeedCard from "@/components/ClientNeedCard";
-import FilterBar from "@/components/navbar/FilterBar";
+import FilterBar from "@/components/navbar/authenticated/FilterBar";
 
 export default function HomePage() {
 	return (
