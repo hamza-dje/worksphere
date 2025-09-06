@@ -278,6 +278,42 @@ export default function LandingPage() {
                         />
                     ))}
                 </section>
+
+                <section className="landing-container bg-gradient-to-br from-primary to-dark-primary py-20 rounded-[36px] mb-28 relative overflow-hidden">
+                    <div className="absolute left-0 top-0 rotate-[-15deg] scale-[150%] opacity-10">
+                        <Image
+                            src="/landing/free-section/pattern.png"
+                            alt=""
+                            width={1300}
+                            height={0}
+                        />
+                    </div>
+                    <div className="flex flex-col gap-5 col-start-2 col-span-4 z-[1]">
+                        <h1 className="text-white">
+                            WorkWave is totally free!
+                        </h1>
+
+                        <p className="text-[21px] tracking-wide text-white">
+                            And finally, you don’t have to pay on additional
+                            services on WorkWave. Every user gets the full
+                            functionalities of WorkWave platform, which means
+                            that every user has the same chances, no pay for
+                            certification, no advertising services...
+                        </p>
+
+                        <button className="mt-10 stroke-button w-fit border-4 border-white text-[21px] text-white opacity-100 hover:bg-white hover:text-primary hover:translate-0 hover:drop-shadow-none">
+                            Join us now
+                        </button>
+                    </div>
+
+                    <Image
+                        src="/landing/free-section/image.png"
+                        alt="WorkWave is totally free!"
+                        width={1000}
+                        height={0}
+                        className="my-auto col-start-7 col-span-5 z-[2]"
+                    />
+                </section>
             </div>
         </>
     );
