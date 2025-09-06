@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import Link from "next/link";
 
 export default function Navbar({
@@ -9,6 +9,7 @@ export default function Navbar({
     isFreelancer: boolean;
     setIsFreelancer: Dispatch<SetStateAction<boolean>>;
 }) {
+    const [menuExpanded, setMenuExpanded] = useState<boolean>(false);
     return (
         <div className="sticky top-0 right-0 left-0 z-10 h-0">
             <header className="w-full py-4 shadow-[0_0_27px_rgba(0,0,0,0.08)] rounded-b-[36px] flex justify-between px-[140px] max-lg:px-[60px] max-sm:px-6 z-10 sticky top-0 right-0 left-0 bg-white">
@@ -29,8 +30,8 @@ export default function Navbar({
                     </span>
                 </div>
                 {/* Navigation buttons */}
-                <div className="flex items-center gap-10 [&>span]:font-primary [&>span]:cursor-pointer [&>span]:text-lg">
-                    <span
+                <div className="flex items-center gap-10 [&>button]:font-primary [&>button]:cursor-pointer [&>button]:text-lg max-xl:hidden">
+                    <button
                         className={`${
                             isFreelancer ? "text-primary font-bold" : ""
                         } relative`}
@@ -43,8 +44,8 @@ export default function Navbar({
                                 display: `${isFreelancer ? "initial" : "none"}`,
                             }}
                         />
-                    </span>
-                    <span
+                    </button>
+                    <button
                         className={`${
                             isFreelancer ? "" : "text-primary font-bold"
                         } relative`}
@@ -57,10 +58,10 @@ export default function Navbar({
                                 display: `${isFreelancer ? "none" : "initial"}`,
                             }}
                         />
-                    </span>
+                    </button>
                 </div>
                 {/* Auth buttons */}
-                <div className="flex gap-4">
+                <div className="flex gap-4 max-xl:hidden">
                     <Link
                         href={"/login"}
                         className="stroke-button font-medium border-primary text-primary opacity-100 py-2.5 px-[22px]"
@@ -70,6 +71,65 @@ export default function Navbar({
                     <button className="normal-button font-medium py-3 px-[22px]">
                         Sign up
                     </button>
+                </div>
+                {/* Responsive menu */}
+                <div className="xl:hidden sm:relative">
+                    <span
+                        className="cursor-pointer"
+                        onClick={() => setMenuExpanded((m) => !m)}
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="120"
+                            height="108"
+                            viewBox="0 0 120 108"
+                            className="fill-primary size-9"
+                        >
+                            <rect width="120" height="20" rx="10" />
+                            <path d="M0 54C0 48.4772 4.47715 44 10 44H110C115.523 44 120 48.4772 120 54V54C120 59.5228 115.523 64 110 64H10C4.47715 64 0 59.5228 0 54V54Z" />
+                            <rect y="88" width="120" height="20" rx="10" />
+                        </svg>
+                    </span>
+
+                    <div
+                        className={`absolute max-sm:w-[calc(100%-12px)] max-sm:mx-auto shadow right-0 top-[70px] max-sm:top-[84px] flex flex-col gap-1 w-[300px] bg-white rounded-[18px] [&>button]:font-primary [&>button]:cursor-pointer [&>button]:text-lg p-2.5 transition-[translate_opacity] duration-150 ease-out ${
+                            menuExpanded
+                                ? "opacity-100 translate-y-0"
+                                : "opacity-0 pointer-events-none -translate-y-4"
+                        }`}
+                    >
+                        <button
+                            onClick={() => setIsFreelancer((i) => !i)}
+                            className={`py-1.5 rounded-xl ${
+                                isFreelancer
+                                    ? "bg-primary font-bold text-white"
+                                    : "hover:bg-[oklch(from_var(--color-green)_l_c_h_/_.15)]"
+                            }`}
+                        >
+                            I want to work
+                        </button>
+                        <button
+                            onClick={() => setIsFreelancer((i) => !i)}
+                            className={`py-1.5 rounded-xl mb-2.5 ${
+                                isFreelancer
+                                    ? "hover:bg-[oklch(from_var(--color-blue)_l_c_h_/_.15)]"
+                                    : "bg-primary font-bold text-white"
+                            }`}
+                        >
+                            I want to hire
+                        </button>
+                        <div className="flex gap-3">
+                            <Link
+                                href={"/login"}
+                                className="stroke-button flex justify-center font-medium border-primary text-primary opacity-100 py-2.5 px-[22px] flex-1"
+                            >
+                                Log in
+                            </Link>
+                            <button className="normal-button font-medium py-3 px-[22px] flex-1">
+                                Sign up
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </header>
         </div>

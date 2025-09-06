@@ -15,7 +15,7 @@ export function CategoryCard({
                     width={90}
                     height={0}
                     alt={name}
-                    className={`${
+                    className={`max-xl:w-[120px] ${
                         imageTitle === "writing" ? "translate-x-2" : ""
                     }`}
                 />
@@ -24,12 +24,12 @@ export function CategoryCard({
                     width={90}
                     height={0}
                     alt={name}
-                    className={`absolute top-0 left-0 opacity-0 group-hover:opacity-100 drop-shadow-[0_0_10px_rgba(0,0,0,.2)] ${
+                    className={`absolute top-0 left-0 opacity-0 group-hover:opacity-100 drop-shadow-[0_0_10px_rgba(0,0,0,.2)] max-xl:w-[120px] ${
                         imageTitle === "writing" ? "translate-x-2" : ""
                     }`}
                 />
             </span>
-            <span className="font-primary font-bold text-xs text-white group-hover:text-primary">
+            <span className="font-primary font-bold text-xs max-xl:text-[16px] text-white group-hover:text-primary">
                 {name}
             </span>
         </div>

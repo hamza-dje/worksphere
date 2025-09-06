@@ -135,7 +135,7 @@
     }
 
     .landing-container {
-        @apply mx-auto grid grid-cols-12 gap-6 w-[1314px];
+        @apply mx-auto grid grid-cols-12 gap-6 w-[1314px] max-2xl:w-[1200px] max-xl:grid-cols-6 max-xl:w-[1000px];
     }
 }
 

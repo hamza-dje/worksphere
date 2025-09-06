@@ -118,7 +118,7 @@ export default function LandingPage() {
                     ))}
                     <div className="absolute z-[2] left-0 top-0 w-full h-full bg-gradient-to-r from-25% from-[rgba(0,0,0,.75)] to-[rgba(0,0,0,0)]" />
                     <div className="landing-container mx-auto z-[2]">
-                        <div className="flex flex-col col-span-6 [&_*]:text-white gap-5">
+                        <div className="flex flex-col col-span-6 max-xl:col-span-4 [&_*]:text-white gap-5">
                             <span className="font-primary font-extrabold text-[43px] leading-14">
                                 Ride the WorkWave and Catch the Perfect{" "}
                                 <span className="font-primary font-extrabold bg-gradient-to-r from-blue to-green bg-clip-text text-transparent!">
@@ -148,7 +148,7 @@ export default function LandingPage() {
                 </section>
 
                 {/* Why section */}
-                <section className="landing-container gap-y-14">
+                <section className="landing-container gap-y-14 max-xl:gap-y-10">
                     <div className="col-span-full flex justify-center mb-8">
                         <h1 className="col-span-full bg-gradient-to-r from-blue to-green w-fit bg-clip-text text-transparent">
                             Why WorkWave?
@@ -166,7 +166,7 @@ export default function LandingPage() {
                         width={1000}
                         height={0}
                         alt="Security"
-                        className="col-span-7 rounded-[36px]"
+                        className="col-span-7 max-xl:col-span-2 rounded-[36px] h-full object-cover"
                     />
 
                     {/* Freedom */}
@@ -175,14 +175,14 @@ export default function LandingPage() {
                         width={1000}
                         height={0}
                         alt="Freedom"
-                        className="col-span-4 rounded-[36px]"
+                        className="col-span-4 max-xl:col-span-2 rounded-[36px] h-full object-cover"
                     />
                     <Image
                         src="/landing/why-section/freedom-2.png"
                         width={1000}
                         height={0}
                         alt="Freedom"
-                        className="col-span-3 rounded-[36px]"
+                        className="col-span-3 max-xl:hidden rounded-[36px] h-full object-cover"
                     />
                     <WhyCard
                         title="Freedom"
@@ -201,20 +201,20 @@ export default function LandingPage() {
                         width={1000}
                         height={0}
                         alt="Freedom"
-                        className="col-span-4 rounded-[36px]"
+                        className="col-span-4 max-xl:col-span-2 rounded-[36px] h-full object-cover"
                     />
                     <Image
                         src="/landing/why-section/toolbox-2.png"
                         width={1000}
                         height={0}
                         alt="Freedom"
-                        className="col-span-3 rounded-[36px]"
+                        className="col-span-3 max-xl:hidden rounded-[36px] h-full object-cover"
                     />
                 </section>
 
                 {/* Categories section */}
-                <section className="landing-container bg-gradient-to-br from-primary to-dark-primary py-20 rounded-[36px]">
-                    <div className="flex flex-col gap-5 col-start-2 col-span-4 row-span-2">
+                <section className="landing-container bg-gradient-to-br from-primary to-dark-primary py-20 max-xl:py-12 max-xl:px-16 rounded-[36px]">
+                    <div className="flex flex-col gap-5 max-xl:gap-2 col-start-2 col-span-4 max-xl:col-span-full xl:row-span-2">
                         <h1 className="text-white">
                             Many categories just to set you up!
                         </h1>
@@ -226,18 +226,14 @@ export default function LandingPage() {
                             just few clicks.
                         </p>
 
-                        <button className="mt-10 stroke-button w-fit border-4 border-white text-[21px] text-white opacity-100 hover:bg-white hover:text-primary hover:translate-0 hover:drop-shadow-none">
+                        <button className="mt-10 max-xl:mb-12 max-xl:mt-6 stroke-button w-fit border-4 border-white text-[21px] text-white opacity-100 hover:bg-white hover:text-primary hover:translate-0 hover:drop-shadow-none">
                             Join us
                         </button>
                     </div>
 
                     {/* Category Cards */}
                     {categoryCards.map((category, i) => (
-                        <CategoryCard
-                            key={i}
-                            name={category.name}
-                            imageTitle={category.imageTitle}
-                        />
+                        <CategoryCard key={i} {...category} />
                     ))}
                     <div className="col-span-2 flex items-center justify-center">
                         <button className="font-primary font-bold text-sm text-white opacity-30 cursor-pointer">
@@ -254,32 +250,19 @@ export default function LandingPage() {
                         </h1>
                     </div>
                     {howCards.firstSection.map((card, i) => (
-                        <HowCard
-                            key={i}
-                            index={i + 1}
-                            color={card.color}
-                            title={card.title}
-                            paragraph={card.paragraph}
-                            buttonContent={card.buttonContent}
-                        />
+                        <HowCard key={i} index={i + 1} {...card} />
                     ))}
                     <p className="col-span-full text-[21px] leading-6 tracking-wide mb-4 mt-16">
                         You don’t want to get through this process? Well, we
                         made you another choice :
                     </p>
                     {howCards.secondSection.map((card, i) => (
-                        <HowCard
-                            key={i}
-                            index={i + 1}
-                            color={card.color}
-                            title={card.title}
-                            paragraph={card.paragraph}
-                            buttonContent={card.buttonContent}
-                        />
+                        <HowCard key={i} index={i + 1} {...card} />
                     ))}
                 </section>
 
-                <section className="landing-container bg-gradient-to-br from-primary to-dark-primary py-20 rounded-[36px] mb-28 relative overflow-hidden">
+                {/* Free Section */}
+                <section className="landing-container bg-gradient-to-br from-primary to-dark-primary py-20 max-xl:py-12 max-xl:px-16 rounded-[36px] mb-28 relative overflow-hidden">
                     <div className="absolute left-0 top-0 rotate-[-15deg] scale-[150%] opacity-10">
                         <Image
                             src="/landing/free-section/pattern.png"
@@ -288,7 +271,7 @@ export default function LandingPage() {
                             height={0}
                         />
                     </div>
-                    <div className="flex flex-col gap-5 col-start-2 col-span-4 z-[1]">
+                    <div className="flex flex-col gap-5 max-xl:gap-2 xl:col-start-2 col-span-4 max-xl:col-span-3 z-[1]">
                         <h1 className="text-white">
                             WorkWave is totally free!
                         </h1>
@@ -301,7 +284,7 @@ export default function LandingPage() {
                             certification, no advertising services...
                         </p>
 
-                        <button className="mt-10 stroke-button w-fit border-4 border-white text-[21px] text-white opacity-100 hover:bg-white hover:text-primary hover:translate-0 hover:drop-shadow-none">
+                        <button className="mt-10 max-xl:mt-6 stroke-button w-fit border-4 border-white text-[21px] text-white opacity-100 hover:bg-white hover:text-primary hover:translate-0 hover:drop-shadow-none">
                             Join us now
                         </button>
                     </div>
@@ -311,7 +294,7 @@ export default function LandingPage() {
                         alt="WorkWave is totally free!"
                         width={1000}
                         height={0}
-                        className="my-auto col-start-7 col-span-5 z-[2]"
+                        className="my-auto xl:col-start-7 col-span-5 max-xl:col-span-3 z-[2]"
                     />
                 </section>
             </div>

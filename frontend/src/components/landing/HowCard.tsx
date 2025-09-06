@@ -9,7 +9,7 @@ export default function HowCard({
 }: HowCardProps) {
     return (
         <div
-            className="col-span-4 flex flex-col gap-3 px-10 py-8 bg-[oklch(from_var(--color-custom)_l_c_h_/_.15)] rounded-[36px] relative"
+            className="col-span-4 max-xl:col-span-2 flex flex-col gap-3 px-10 py-8 bg-[oklch(from_var(--color-custom)_l_c_h_/_.15)] rounded-[36px] relative"
             style={
                 {
                     "--color-custom": `var(--color-${color})`,
@@ -17,7 +17,7 @@ export default function HowCard({
             }
         >
             {/* TODO: Add custom colors and fix index appearance */}
-            <span className="absolute top-0 h-full right-[20px] -z-[1] opacity-15">
+            <span className="absolute top-0 h-full right-[20px] max-xl:right-2.5 -z-[1] opacity-15">
                 <span
                     className="absolute top-[50%] translate-y-[-50%] right-0 font-primary font-black text-[213px] text-[var(--color-custom)] "
                     style={{
