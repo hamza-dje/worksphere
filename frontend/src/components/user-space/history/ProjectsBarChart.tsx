@@ -1,5 +1,4 @@
-import CardWrapper from "@/components/user-space/CardWrapper";
-import { Project } from "next/dist/build/swc/types";
+import CardWrapper from "../shared/CardWrapper";
 
 export default function ProjectsBarChart({
     projectsByMonth,

@@ -1,10 +1,10 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useRef, useState, useEffect, Fragment } from "react";
-import CardWrapper from "../CardWrapper";
-import StatusLabel from "../StatusLabel";
 import ProjectsType from "@/utils/types/ProjectsType";
 import formatValue from "@/utils/functions/formatValue";
+import CardWrapper from "../shared/CardWrapper";
+import StatusLabel from "../shared/StatusLabel";
 
 export default function ProjectsContainer({
     projects,

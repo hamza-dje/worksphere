@@ -1,21 +1,15 @@
 "use client";
-import CardWrapper from "@/components/user-space/CardWrapper";
-import LatestProjects from "@/components/user-space/dashboard/LatestProjects";
-import MyServices from "@/components/user-space/dashboard/MyServices";
-import SkillsPie from "@/components/user-space/dashboard/SkillsPie";
-import NumberCard from "@/components/user-space/NumberCard";
+import LatestProjects from "@/components/user-space/shared/dashboard/LatestProjects";
+import MyServices from "@/components/user-space/freelancer-specific/dashboard/MyServices";
+import SkillsPie from "@/components/user-space/freelancer-specific/dashboard/SkillsPie";
+import CardWrapper from "@/components/user-space/shared/CardWrapper";
+import NumberCard from "@/components/user-space/shared/NumberCard";
 import { useEffect } from "react";
+import MyActiveNeeds from "@/components/user-space/client-specific/dashboard/MyActiveNeeds";
+import useUserRole from "@/hooks/useUserRole";
 
 export default function DashboardPage() {
-    const getUserRole = (): "freelancer" | "client" => {
-        return "client";
-    };
-
-    const userRole = getUserRole();
-
-    useEffect(() => {
-        document.body.classList.add(`role-${userRole}`);
-    }, []);
+    const userRole = useUserRole();
 
     return (
         <>
@@ -59,29 +53,47 @@ export default function DashboardPage() {
                     </CardWrapper>
                 </div>
             )}
-            <MyServices
-                services={[
-                    {
-                        name: "Lorem ipsum dolor sit amet, elit elit elit elit elit elit",
-                        skill: "Packaging Design",
-                        sold: 4,
-                        cost: 120,
-                    },
-                    {
-                        name: "Lorem ipsum dolor sit amet, elit elit elit elit elit elit",
-                        skill: "Packaging Design",
-                        sold: 4,
-                        cost: 120,
-                    },
-                    {
-                        name: "Lorem ipsum dolor sit amet, elit elit elit elit elit elit",
-                        skill: "Packaging Design",
-                        sold: 4,
-                        cost: 120,
-                    },
-                ]}
-            />
+            {userRole === "freelancer" ? (
+                <MyServices
+                    services={[
+                        {
+                            name: "Lorem ipsum dolor sit amet, elit elit elit elit elit elit",
+                            skill: "Packaging Design",
+                            sold: 4,
+                            cost: 120,
+                        },
+                        {
+                            name: "Lorem ipsum dolor sit amet, elit elit elit elit elit elit",
+                            skill: "Packaging Design",
+                            sold: 4,
+                            cost: 120,
+                        },
+                        {
+                            name: "Lorem ipsum dolor sit amet, elit elit elit elit elit elit",
+                            skill: "Packaging Design",
+                            sold: 4,
+                            cost: 120,
+                        },
+                    ]}
+                />
+            ) : (
+                <MyActiveNeeds
+                    needs={[
+                        {
+                            name: "Lorem ipsum dolor sit amet, elit elit elit elit elit elit",
+                            category: "Engineering & Architecture",
+                            skills: [
+                                "Packaging Design",
+                                "Packaging Design",
+                                "Packaging Design",
+                            ],
+                            budget: [200, 300],
+                        },
+                    ]}
+                />
+            )}
             <LatestProjects
+                userRole={userRole}
                 projects={[
                     {
                         name: "Lorem ipsum dolor sit amet, elit elit elit elit elit elit",

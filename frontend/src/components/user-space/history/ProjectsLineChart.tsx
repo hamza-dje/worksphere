@@ -1,4 +1,4 @@
-import CardWrapper from "@/components/user-space/CardWrapper";
+import CardWrapper from "../shared/CardWrapper";
 
 export default function ProjectsLineChart() {
     const skills = [

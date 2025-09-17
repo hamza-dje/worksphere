@@ -1,5 +1,5 @@
 import ProjectsContainer from "@/components/user-space/history/ProjectsContainer";
-import NumberCard from "@/components/user-space/NumberCard";
+import NumberCard from "@/components/user-space/shared/NumberCard";
 import ProjectsBarChart from "@/components/user-space/history/ProjectsBarChart";
 import ProjectsLineChart from "@/components/user-space/history/ProjectsLineChart";
 import ProjectsType from "@/utils/types/ProjectsType";

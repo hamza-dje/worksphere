@@ -1,4 +1,4 @@
-import CardWrapper from "../CardWrapper";
+import CardWrapper from "../../shared/CardWrapper";
 import DonutArcs from "./DonutChart";
 
 export default function SkillsPie({

@@ -1,14 +1,16 @@
 "use client";
 import ProjectsType from "@/utils/types/ProjectsType";
-import CardWrapper from "../CardWrapper";
 import StatusLabel from "../StatusLabel";
 import { useRouter } from "next/navigation";
 import formatValue from "@/utils/functions/formatValue";
+import CardWrapper from "../CardWrapper";
 
 export default function LatestProjects({
     projects,
+    userRole,
 }: {
     projects: ProjectsType;
+    userRole: "freelancer" | "client";
 }) {
     const router = useRouter();
 
@@ -25,8 +27,12 @@ export default function LatestProjects({
                         <th>Type</th>
                         <th>Start date</th>
                         <th>Deadline</th>
-                        <th>Final cost</th>
-                        <th>Client</th>
+                        <th>
+                            {userRole === "freelancer"
+                                ? "Earnings"
+                                : "Final cost"}
+                        </th>
+                        <th>Owner</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,8 +57,9 @@ export default function LatestProjects({
                             <td className="opacity-60">{project.type}</td>
                             <td>{project.date}</td>
                             <td>{project.deadline}</td>
-                            <td className="font-bold text-green">
-                                +${formatValue(project.cost)}
+                            <td className="font-bold text-primary">
+                                {userRole === "freelancer" && "+"}$
+                                {formatValue(project.cost)}
                             </td>
                             <td>{project.client}</td>
                         </tr>

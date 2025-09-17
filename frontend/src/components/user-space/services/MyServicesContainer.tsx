@@ -1,6 +1,6 @@
-import CardWrapper from "@/components/user-space/CardWrapper";
-import Service from "@/components/user-space/services/Service";
 import Link from "next/link";
+import CardWrapper from "../shared/CardWrapper";
+import Service from "./Service";
 
 export default function MyServicesContainer() {
     const services = [

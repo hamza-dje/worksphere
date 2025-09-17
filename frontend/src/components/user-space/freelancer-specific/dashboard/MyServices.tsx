@@ -1,5 +1,5 @@
 import formatValue from "@/utils/functions/formatValue";
-import CardWrapper from "../CardWrapper";
+import CardWrapper from "../../shared/CardWrapper";
 
 export default function MyServices({
     services,
