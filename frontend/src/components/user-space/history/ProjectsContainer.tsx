@@ -8,12 +8,14 @@ import StatusLabel from "../shared/StatusLabel";
 
 export default function ProjectsContainer({
     projects,
+    userRole,
 }: {
     projects: ProjectsType;
+    userRole: "freelancer" | "client";
 }) {
     return (
         <CardWrapper
-            header="Latest Projects"
+            header="Projects History"
             className="col-span-full lg:max-h-[460px] overflow-auto no-scrollbar"
         >
             <table>
@@ -24,8 +26,12 @@ export default function ProjectsContainer({
                         <th>Type</th>
                         <th>Start date</th>
                         <th>Deadline</th>
-                        <th>Final cost</th>
-                        <th>Client</th>
+                        <th>
+                            {userRole === "freelancer"
+                                ? "Earnings"
+                                : "Final cost"}
+                        </th>
+                        <th>Owner</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,8 +84,9 @@ export default function ProjectsContainer({
                                     </td>
                                     <td>{project.date}</td>
                                     <td>{project.deadline}</td>
-                                    <td className="font-bold text-green">
-                                        +${formatValue(project.cost)}
+                                    <td className="font-bold text-primary">
+                                        {userRole === "freelancer" && "+"}$
+                                        {formatValue(project.cost)}
                                     </td>
                                     <td>{project.client}</td>
                                 </tr>

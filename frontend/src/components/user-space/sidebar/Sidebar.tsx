@@ -17,8 +17,10 @@ import {
     WorkingOnIcon,
 } from "./sidebar-icons/Icons";
 import { useState } from "react";
+import useUserRole from "@/hooks/useUserRole";
 
 export default function Sidebar() {
+    const userRole = useUserRole();
     const [subMenuShown, setSubMenuShown] = useState<
         [boolean, boolean, boolean]
     >([false, false, false]);
@@ -39,8 +41,9 @@ export default function Sidebar() {
             childrenButtons: [
                 {
                     icon: <WorkingOnIcon />,
-                    name: "Working On",
-                    href: "/working-on",
+                    name: userRole === "freelancer" ? "Working On" : "Pending",
+                    href:
+                        userRole === "freelancer" ? "/working-on" : "/pending",
                 },
                 {
                     icon: <HistoryIcon />,
@@ -51,8 +54,8 @@ export default function Sidebar() {
         },
         {
             icon: <MyServicesIcon />,
-            name: "My Services",
-            href: "/my-services",
+            name: `My ${userRole === "freelancer" ? "Services" : "Needs"}`,
+            href: `/my-${userRole === "freelancer" ? "services" : "needs"}`,
         },
         {
             icon: <MyFinancesIcon />,

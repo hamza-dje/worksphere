@@ -1,10 +1,15 @@
+"use client";
 import ProjectsContainer from "@/components/user-space/history/ProjectsContainer";
 import NumberCard from "@/components/user-space/shared/NumberCard";
 import ProjectsBarChart from "@/components/user-space/history/ProjectsBarChart";
 import ProjectsLineChart from "@/components/user-space/history/ProjectsLineChart";
 import ProjectsType from "@/utils/types/ProjectsType";
+import useUserRole from "@/hooks/useUserRole";
+import CardWrapper from "@/components/user-space/shared/CardWrapper";
 
 export default function HistoryPage() {
+    const userRole = useUserRole();
+
     const projects: ProjectsType = [
         {
             name: "Lorem ipsum dolor sit amet, elit elit elit elit elit elit",
@@ -77,8 +82,31 @@ export default function HistoryPage() {
         <>
             <NumberCard header="Projects" value={214} margin="-21%" />
             <ProjectsBarChart projectsByMonth={projectsByMonth} />
-            <ProjectsLineChart />
-            <ProjectsContainer projects={projects} />
+            {userRole === "freelancer" ? (
+                <ProjectsLineChart />
+            ) : (
+                <div className="flex flex-col gap-2 max-lg:col-span-full max-lg:flex-row">
+                    <CardWrapper
+                        header="Pending Projects"
+                        className="flex-row justify-between items-center flex-1 lg:rounded-b-lg max-lg:rounded-r-lg max-sm:p-5"
+                        href="/pending"
+                    >
+                        <div className="font-primary font-bold text-4xl text-primary max-sm:text-2xl">
+                            3
+                        </div>
+                    </CardWrapper>
+                    <CardWrapper
+                        header="Active Needs"
+                        className="flex-row justify-between items-center flex-1 lg:rounded-t-lg max-lg:rounded-l-lg max-sm:p-5"
+                        href="/my-needs"
+                    >
+                        <div className="font-primary font-bold text-4xl text-primary flex items-center gap-2 max-sm:text-2xl">
+                            25
+                        </div>
+                    </CardWrapper>
+                </div>
+            )}
+            <ProjectsContainer projects={projects} userRole={userRole} />
         </>
     );
 }

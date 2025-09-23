@@ -38,6 +38,7 @@ export default function DashboardPage() {
                     <CardWrapper
                         header="Pending Projects"
                         className="flex-row justify-between items-center flex-1 lg:rounded-b-lg max-lg:rounded-r-lg max-sm:p-5"
+                        href="/pending"
                     >
                         <div className="font-primary font-bold text-4xl text-primary max-sm:text-2xl">
                             3
@@ -46,6 +47,7 @@ export default function DashboardPage() {
                     <CardWrapper
                         header="Active Needs"
                         className="flex-row justify-between items-center flex-1 lg:rounded-t-lg max-lg:rounded-l-lg max-sm:p-5"
+                        href="/my-needs"
                     >
                         <div className="font-primary font-bold text-4xl text-primary flex items-center gap-2 max-sm:text-2xl">
                             25
@@ -79,6 +81,26 @@ export default function DashboardPage() {
             ) : (
                 <MyActiveNeeds
                     needs={[
+                        {
+                            name: "Lorem ipsum dolor sit amet, elit elit elit elit elit elit",
+                            category: "Engineering & Architecture",
+                            skills: [
+                                "Packaging Design",
+                                "Packaging Design",
+                                "Packaging Design",
+                            ],
+                            budget: [200, 300],
+                        },
+                        {
+                            name: "Lorem ipsum dolor sit amet, elit elit elit elit elit elit",
+                            category: "Engineering & Architecture",
+                            skills: [
+                                "Packaging Design",
+                                "Packaging Design",
+                                "Packaging Design",
+                            ],
+                            budget: [200, 300],
+                        },
                         {
                             name: "Lorem ipsum dolor sit amet, elit elit elit elit elit elit",
                             category: "Engineering & Architecture",
