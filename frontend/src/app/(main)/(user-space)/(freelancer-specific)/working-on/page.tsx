@@ -40,7 +40,7 @@ export default function WorkingOnPage() {
             {/* TODO: Complete it */}
             <CardWrapper
                 header="Contact Client"
-                className="gap-4"
+                className="justify-between"
                 href="/inbox"
             >
                 <MessageCard
@@ -50,7 +50,9 @@ export default function WorkingOnPage() {
                     newMessage
                     messagesCount={2}
                 />
-                <p className="font-primary text-xs opacity-20">Go to inbox</p>
+                <p className="font-primary text-xs opacity-20 self-end">
+                    Go to inbox
+                </p>
             </CardWrapper>
         </>
     );

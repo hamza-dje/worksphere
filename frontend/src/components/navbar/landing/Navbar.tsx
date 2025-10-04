@@ -1,17 +1,27 @@
+"use client";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navbar({
-    isFreelancer,
-    setIsFreelancer,
+    role,
+    setRole,
 }: {
-    isFreelancer: boolean;
-    setIsFreelancer: Dispatch<SetStateAction<boolean>>;
+    role?: { isFreelancer: boolean; isClient: boolean };
+    setRole?: Dispatch<
+        SetStateAction<{ isFreelancer: boolean; isClient: boolean }>
+    >;
 }) {
+    const path = usePathname();
+
     const [menuExpanded, setMenuExpanded] = useState<boolean>(false);
     const responsiveMenuRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
+        if (path !== "/") {
+            document.body.classList.remove("role-client");
+        }
+
         const handleClickOutside = (e: MouseEvent) => {
             if (
                 responsiveMenuRef.current &&
@@ -47,35 +57,73 @@ export default function Navbar({
                     </span>
                 </div>
                 {/* Navigation buttons */}
-                <div className="flex items-center gap-10 [&>button]:font-primary [&>button]:cursor-pointer [&>button]:text-lg max-xl:hidden">
-                    <button
+                <div className="flex items-center gap-10 [&>a]:font-primary [&>a]:text-lg max-xl:hidden">
+                    <Link
+                        href={"/"}
                         className={`${
-                            isFreelancer ? "text-primary font-bold" : ""
+                            role === undefined
+                                ? "text-black"
+                                : role.isFreelancer && path === "/"
+                                ? "text-primary font-bold"
+                                : ""
                         } relative`}
-                        onClick={() => setIsFreelancer(true)}
+                        {...(setRole !== undefined
+                            ? {
+                                  onClick: () =>
+                                      setRole({
+                                          isFreelancer: true,
+                                          isClient: false,
+                                      }),
+                              }
+                            : {})}
                     >
                         I want to work
                         <span
                             className="absolute top-[48px] -left-0.5 -right-0.5 h-1.5 rounded-t-full bg-primary"
                             style={{
-                                display: `${isFreelancer ? "initial" : "none"}`,
+                                display: `${
+                                    role === undefined
+                                        ? "none"
+                                        : role?.isFreelancer && path === "/"
+                                        ? "initial"
+                                        : "none"
+                                }`,
                             }}
                         />
-                    </button>
-                    <button
+                    </Link>
+                    <Link
+                        href={"/"}
                         className={`${
-                            isFreelancer ? "" : "text-primary font-bold"
+                            role === undefined
+                                ? "text-black"
+                                : role?.isFreelancer && path === "/"
+                                ? ""
+                                : "text-primary font-bold"
                         } relative`}
-                        onClick={() => setIsFreelancer(false)}
+                        {...(setRole !== undefined
+                            ? {
+                                  onClick: () =>
+                                      setRole({
+                                          isFreelancer: false,
+                                          isClient: false,
+                                      }),
+                              }
+                            : {})}
                     >
                         I want to hire
                         <span
                             className="absolute top-[48px] -left-0.5 -right-0.5 h-1.5 rounded-t-full bg-primary"
                             style={{
-                                display: `${isFreelancer ? "none" : "initial"}`,
+                                display: `${
+                                    role === undefined
+                                        ? "none"
+                                        : role?.isFreelancer && path === "/"
+                                        ? "none"
+                                        : "initial"
+                                }`,
                             }}
                         />
-                    </button>
+                    </Link>
                 </div>
                 {/* Auth buttons */}
                 <div className="flex gap-4 max-xl:hidden">
@@ -119,9 +167,17 @@ export default function Navbar({
                         }`}
                     >
                         <button
-                            onClick={() => setIsFreelancer((i) => !i)}
+                            {...(setRole !== undefined
+                                ? {
+                                      onClick: () =>
+                                          setRole((prev) => ({
+                                              isFreelancer: !prev.isFreelancer,
+                                              isClient: !prev.isClient,
+                                          })),
+                                  }
+                                : {})}
                             className={`py-1.5 rounded-xl ${
-                                isFreelancer
+                                role?.isFreelancer
                                     ? "bg-primary font-bold text-white"
                                     : "hover:bg-[oklch(from_var(--color-green)_l_c_h_/_.15)]"
                             }`}
@@ -129,9 +185,17 @@ export default function Navbar({
                             I want to work
                         </button>
                         <button
-                            onClick={() => setIsFreelancer((i) => !i)}
+                            {...(setRole !== undefined
+                                ? {
+                                      onClick: () =>
+                                          setRole((prev) => ({
+                                              isFreelancer: !prev.isFreelancer,
+                                              isClient: !prev.isClient,
+                                          })),
+                                  }
+                                : {})}
                             className={`py-1.5 rounded-xl mb-2.5 ${
-                                isFreelancer
+                                role?.isFreelancer
                                     ? "hover:bg-[oklch(from_var(--color-blue)_l_c_h_/_.15)]"
                                     : "bg-primary font-bold text-white"
                             }`}

@@ -6,17 +6,27 @@ import WhyCard from "@/components/landing/WhyCard";
 import { CategoryCard } from "@/components/landing/CategoryCard";
 import HowCard from "@/components/landing/HowCard";
 import Link from "next/link";
-import HowCardProps from "@/utils/types/HowCardProps";
+
+type HowCardProps = {
+    index: number;
+    color: "green" | "blue";
+    title: string;
+    paragraph: string;
+    buttonContent?: string;
+};
 
 export default function LandingPage() {
-    const [isFreelancer, setIsFreelancer] = useState<boolean>(true);
+    const [role, setRole] = useState<{
+        isFreelancer: boolean;
+        isClient: boolean;
+    }>({ isFreelancer: true, isClient: false });
     useEffect(() => {
-        if (isFreelancer) {
+        if (role.isFreelancer) {
             document.body.classList.remove("role-client");
         } else {
             document.body.classList.add("role-client");
         }
-    }, [isFreelancer]);
+    }, [role.isFreelancer]);
 
     const categoryCards = [
         {
@@ -44,47 +54,49 @@ export default function LandingPage() {
     const howCards: Record<string, Array<Omit<HowCardProps, "index">>> = {
         firstSection: [
             {
-                color: isFreelancer ? "green" : "blue",
+                color: role.isFreelancer ? "green" : "blue",
                 title: "Share an offer",
                 paragraph:
                     "Share an offer of a service in our services marketplace, and wait for a client to hire you.",
                 buttonContent: "Share an offer",
             },
             {
-                color: isFreelancer ? "green" : "blue",
+                color: role.isFreelancer ? "green" : "blue",
                 title: "Make a deal",
-                paragraph: isFreelancer
+                paragraph: role.isFreelancer
                     ? "The client tells you about what you wil do, so you use your skills and make his needs into reality, then you upload your work, so the client take it, once he approves it, you are good to go."
                     : "Once a freelancer applies for it, he can start working on your project, you can contact him by our messaging system, to update him about the project he is working on.",
             },
             {
-                color: isFreelancer ? "green" : "blue",
-                title: isFreelancer ? "Get paid" : "Pay the fee",
-                paragraph: isFreelancer
+                color: role.isFreelancer ? "green" : "blue",
+                title: role.isFreelancer ? "Get paid" : "Pay the fee",
+                paragraph: role.isFreelancer
                     ? "Once the client approved your delivery, you will get paid, which means the money will be sent and added to your balance in WorkWave, so you can withdraw it with the method you want, by the payment method you desire."
                     : "Once you approve the freelancer’s final delivery, the service fee will be extracted from your balance, so the freelancer gets paid.",
             },
         ],
         secondSection: [
             {
-                color: isFreelancer ? "blue" : "green",
-                title: `Choose a ${isFreelancer ? "need" : "service"}`,
-                paragraph: isFreelancer
+                color: role.isFreelancer ? "blue" : "green",
+                title: `Choose a ${role.isFreelancer ? "need" : "service"}`,
+                paragraph: role.isFreelancer
                     ? "Consult client needs and choose one you are capable of doing within the client terms, then apply for it."
                     : "Consult freelancers services and choose the one you need for your business.",
-                buttonContent: `Consult ${isFreelancer ? "needs" : "services"}`,
+                buttonContent: `Consult ${
+                    role.isFreelancer ? "needs" : "services"
+                }`,
             },
             {
-                color: isFreelancer ? "blue" : "green",
+                color: role.isFreelancer ? "blue" : "green",
                 title: "Make a deal",
-                paragraph: isFreelancer
+                paragraph: role.isFreelancer
                     ? "Once you get chosen by the client, you start working on his project, when you finalize it, you upload it so the client can take it, when the client approves it, you are good to go."
                     : "Send the freelancer a brief of what you need so he can start working on your project, you can contact him by our messaging system, to update him about the project he is working on.",
             },
             {
-                color: isFreelancer ? "blue" : "green",
-                title: isFreelancer ? "Get paid" : "Pay the fee",
-                paragraph: isFreelancer
+                color: role.isFreelancer ? "blue" : "green",
+                title: role.isFreelancer ? "Get paid" : "Pay the fee",
+                paragraph: role.isFreelancer
                     ? "Once the client approved your delivery, you will get paid, which means the money will be sent and added to your balance in WorkWave, so you can withdraw it with the method you want, by the payment method you desire."
                     : "Once you approve the freelancer’s final delivery, the service fee will be extracted from your balance, so the freelancer gets paid.",
             },
@@ -93,10 +105,7 @@ export default function LandingPage() {
 
     return (
         <>
-            <Navbar
-                isFreelancer={isFreelancer}
-                setIsFreelancer={setIsFreelancer}
-            />
+            <Navbar role={role} setRole={setRole} />
 
             {/* Hero section */}
             <div className="flex flex-col gap-[200px] max-md:gap-[120px]">
@@ -105,7 +114,7 @@ export default function LandingPage() {
                         <Image
                             key={i}
                             src={`/landing/hero/${
-                                isFreelancer ? "freelancer" : "client"
+                                role.isFreelancer ? "freelancer" : "client"
                             }/${imageId}.png`}
                             alt="Background"
                             width={1000}
@@ -127,21 +136,30 @@ export default function LandingPage() {
                                 </span>
                             </span>
                             <p className="font-secondary text-white text-[21.33px] max-md:text-lg tracking-[0.4px] mb-10">
-                                {isFreelancer
+                                {role.isFreelancer
                                     ? "Unlock opportunities to earn reliable income, all while working from home."
                                     : "Connect with reliable talented freelances, and grow your business, just from home."}
                             </p>
                             <div className="flex gap-[43px] max-sm:flex-col max-sm:gap-5 sm:items-center">
-                                <button className="normal-button">
-                                    {isFreelancer
+                                <Link
+                                    href={"/signup"}
+                                    className="normal-button"
+                                >
+                                    {role.isFreelancer
                                         ? "Find work opportunities"
                                         : "Find freelance services"}
-                                </button>
+                                </Link>
                                 <button
                                     className="font-primary font-bold cursor-pointer max-md:text-sm"
-                                    onClick={() => setIsFreelancer((i) => !i)}
+                                    onClick={() =>
+                                        setRole((prev) => ({
+                                            isFreelancer: !prev.isFreelancer,
+                                            isClient: !prev.isClient,
+                                        }))
+                                    }
                                 >
-                                    I want to {isFreelancer ? "hire" : "work"}
+                                    I want to{" "}
+                                    {role.isFreelancer ? "hire" : "work"}
                                 </button>
                             </div>
                         </div>
@@ -228,9 +246,12 @@ export default function LandingPage() {
                         </p>
 
                         <div className="flex items-center gap-6 max-sm:gap-4 mt-10 lg:max-xl:mb-12 max-xl:mt-6">
-                            <button className="stroke-button border-4 border-white text-[21px] text-white opacity-100 hover:bg-white hover:text-primary hover:translate-0 hover:drop-shadow-none max-sm:text-lg max-sm:px-3 max-sm:flex-1 max-sm:max-w-[180px] max-sm:py-3">
+                            <Link
+                                href={"/signup"}
+                                className="stroke-button border-4 border-white text-[21px] text-white opacity-100 hover:bg-white hover:text-primary hover:translate-0 hover:drop-shadow-none max-sm:text-lg max-sm:px-3 max-sm:flex-1 max-sm:max-w-[180px] max-sm:py-3"
+                            >
                                 Join us
-                            </button>
+                            </Link>
 
                             <Link
                                 href={""}
@@ -246,9 +267,12 @@ export default function LandingPage() {
                         <CategoryCard key={i} {...category} />
                     ))}
                     <div className="col-span-2 flex items-center justify-center max-lg:hidden">
-                        <button className="font-primary font-bold text-sm text-white opacity-30 cursor-pointer">
+                        <Link
+                            href={"/categories"}
+                            className="font-primary font-bold text-sm text-white opacity-30 cursor-pointer"
+                        >
                             View more
-                        </button>
+                        </Link>
                     </div>
                 </section>
 
@@ -295,9 +319,12 @@ export default function LandingPage() {
                             certification, no advertising services...
                         </p>
 
-                        <button className="mt-10 max-xl:mt-6 stroke-button sm:w-fit border-4 border-white text-[21px] max-sm:text-lg max-sm:px-3 max-sm:flex-1 max-sm:py-3 text-white opacity-100 hover:bg-white hover:text-primary hover:translate-0 hover:drop-shadow-none">
+                        <Link
+                            href={"/signup"}
+                            className="mt-10 max-xl:mt-6 stroke-button sm:w-fit border-4 border-white text-[21px] max-sm:text-lg max-sm:px-3 max-sm:flex-1 max-sm:py-3 text-white opacity-100 hover:bg-white hover:text-primary hover:translate-0 hover:drop-shadow-none"
+                        >
                             Join us now
-                        </button>
+                        </Link>
                     </div>
 
                     <Image

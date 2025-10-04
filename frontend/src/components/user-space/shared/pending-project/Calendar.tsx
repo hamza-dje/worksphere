@@ -111,6 +111,7 @@ export default function Calendar({
 
     return (
         <CardWrapper
+            className="gap-1!"
             customHeader={
                 <div className="flex justify-between">
                     <h6 className="font-primary text-primary opacity-40 text-sm">

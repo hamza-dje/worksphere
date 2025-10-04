@@ -1,4 +1,12 @@
-import HowCardProps from "@/utils/types/HowCardProps";
+import Link from "next/link";
+
+type HowCardProps = {
+    index: number;
+    color: "green" | "blue";
+    title: string;
+    paragraph: string;
+    buttonContent?: string;
+};
 
 export default function HowCard({
     index,
@@ -41,9 +49,12 @@ export default function HowCard({
             </p>
 
             {buttonContent && (
-                <button className="font-primary font-bold text-sm px-5 py-2 border-2 border-[var(--color-custom)] text-[var(--color-custom)] sm:self-center rounded-[14px] hover:bg-[var(--color-custom)] hover:text-white transition duration-200 ease-out cursor-pointer mt-5">
+                <Link
+                    href={"/signup"}
+                    className="font-primary font-bold text-sm px-5 py-2 border-2 border-[var(--color-custom)] text-[var(--color-custom)] sm:self-center rounded-[14px] hover:bg-[var(--color-custom)] hover:text-white transition duration-200 ease-out cursor-pointer mt-5"
+                >
                     {buttonContent}
-                </button>
+                </Link>
             )}
         </div>
     );
