@@ -1,3 +1,4 @@
+import useUserRole from "@/hooks/useUserRole";
 import MenuButton from "./MenuButton";
 
 export default function UserMenu({
@@ -7,6 +8,8 @@ export default function UserMenu({
     userMenuShown: boolean;
     setUserShown: () => void;
 }) {
+    const userRole = useUserRole();
+
     return (
         <div
             className={`absolute sm:top-[80px] lg:right-[50%] max-lg:right-0 lg:translate-x-[50%] w-[360px] grid grid-cols-2 gap-x-2.5 max-sm:px-2 max-sm:top-[calc(100%+10px)] max-sm:w-full ${
@@ -16,9 +19,15 @@ export default function UserMenu({
             } transition-all duration-200 ease-out`}
         >
             <MenuButton name="Dashboard" />
-            <MenuButton name="Working On" />
-            <MenuButton name="My Services" />
-            <MenuButton name="Withdraw" />
+            <MenuButton
+                name={userRole === "freelancer" ? "Working On" : "Pending"}
+            />
+            {userRole === "freelancer" && (
+                <>
+                    <MenuButton name="My Services" />
+                    <MenuButton name="Withdraw" />
+                </>
+            )}
             <MenuButton name="Profile" />
             <MenuButton name="Account" />
             <button className="normal-button col-span-2 my-2">

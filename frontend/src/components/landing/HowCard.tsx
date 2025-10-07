@@ -24,7 +24,6 @@ export default function HowCard({
                 } as React.CSSProperties
             }
         >
-            {/* TODO: Add custom colors and fix index appearance */}
             <span className="absolute top-0 h-full right-[20px] max-xl:right-2.5 -z-[1] opacity-15">
                 <span
                     className="absolute top-[50%] translate-y-[-50%] right-0 font-primary font-black text-[213px] text-[var(--color-custom)] "

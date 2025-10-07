@@ -37,7 +37,6 @@ export default function WorkingOnPage() {
                 deadline={{ year: new Date().getFullYear(), month: 9, day: 10 }}
             />
 
-            {/* TODO: Complete it */}
             <CardWrapper
                 header="Contact Client"
                 className="justify-between"
@@ -53,6 +52,11 @@ export default function WorkingOnPage() {
                 <p className="font-primary text-xs opacity-20 self-end">
                     Go to inbox
                 </p>
+            </CardWrapper>
+
+            {/* TODO: Finish implementing Deliverables component */}
+            <CardWrapper header="Deliverables" className="col-span-full">
+                <div></div>
             </CardWrapper>
         </>
     );

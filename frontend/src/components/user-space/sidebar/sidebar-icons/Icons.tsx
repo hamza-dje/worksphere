@@ -303,6 +303,7 @@ export function ModifyAccountIcon(props: React.SVGProps<SVGSVGElement>) {
             width="16"
             height="17"
             viewBox="0 0 16 17"
+            {...props}
         >
             <path
                 fillRule="evenodd"
