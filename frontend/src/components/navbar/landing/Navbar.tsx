@@ -1,27 +1,25 @@
 "use client";
 import Image from "next/image";
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function Navbar({
-    role,
-    setRole,
-}: {
-    role?: { isFreelancer: boolean; isClient: boolean };
-    setRole?: Dispatch<
-        SetStateAction<{ isFreelancer: boolean; isClient: boolean }>
-    >;
-}) {
+export default function Navbar() {
     const path = usePathname();
+    console.log(path === "/client");
 
     const [menuExpanded, setMenuExpanded] = useState<boolean>(false);
     const responsiveMenuRef = useRef<HTMLDivElement>(null);
+
     useEffect(() => {
-        if (path !== "/") {
+        if (path === "/client") {
+            document.body.classList.add("role-client");
+        } else {
             document.body.classList.remove("role-client");
         }
+    }, [path]);
 
+    useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
             if (
                 responsiveMenuRef.current &&
@@ -59,67 +57,37 @@ export default function Navbar({
                 {/* Navigation buttons */}
                 <div className="flex items-center gap-10 [&>a]:font-primary [&>a]:text-lg max-xl:hidden">
                     <Link
-                        href={"/"}
+                        href={"/freelancer"}
                         className={`${
-                            role === undefined
-                                ? "text-black"
-                                : role.isFreelancer && path === "/"
-                                ? "text-primary font-bold"
-                                : ""
+                            path === "/freelancer"
+                                ? "text-green font-bold"
+                                : "text-black"
                         } relative`}
-                        {...(setRole !== undefined
-                            ? {
-                                  onClick: () =>
-                                      setRole({
-                                          isFreelancer: true,
-                                          isClient: false,
-                                      }),
-                              }
-                            : {})}
                     >
                         I want to work
                         <span
                             className="absolute top-[48px] -left-0.5 -right-0.5 h-1.5 rounded-t-full bg-primary"
                             style={{
                                 display: `${
-                                    role === undefined
-                                        ? "none"
-                                        : role?.isFreelancer && path === "/"
-                                        ? "initial"
-                                        : "none"
+                                    path === "/freelancer" ? "initial" : "none"
                                 }`,
                             }}
                         />
                     </Link>
                     <Link
-                        href={"/"}
+                        href={"/client"}
                         className={`${
-                            role === undefined
-                                ? "text-black"
-                                : role?.isFreelancer && path === "/"
-                                ? ""
-                                : "text-primary font-bold"
+                            path === "/client"
+                                ? "font-bold text-blue"
+                                : "text-black"
                         } relative`}
-                        {...(setRole !== undefined
-                            ? {
-                                  onClick: () =>
-                                      setRole({
-                                          isFreelancer: false,
-                                          isClient: false,
-                                      }),
-                              }
-                            : {})}
                     >
                         I want to hire
                         <span
                             className="absolute top-[48px] -left-0.5 -right-0.5 h-1.5 rounded-t-full bg-primary"
                             style={{
                                 display: `${
-                                    role === undefined
-                                        ? "none"
-                                        : role?.isFreelancer && path === "/"
-                                        ? "none"
-                                        : "initial"
+                                    path === "/client" ? "initial" : "none"
                                 }`,
                             }}
                         />
@@ -166,42 +134,26 @@ export default function Navbar({
                                 : "opacity-0 pointer-events-none -translate-y-4"
                         }`}
                     >
-                        <button
-                            {...(setRole !== undefined
-                                ? {
-                                      onClick: () =>
-                                          setRole((prev) => ({
-                                              isFreelancer: !prev.isFreelancer,
-                                              isClient: !prev.isClient,
-                                          })),
-                                  }
-                                : {})}
-                            className={`py-1.5 rounded-xl ${
-                                role?.isFreelancer
+                        <Link
+                            href={"/freelancer"}
+                            className={`py-1.5 rounded-xl font-primary text-center ${
+                                path === "/freelancer"
                                     ? "bg-primary font-bold text-white"
                                     : "hover:bg-[oklch(from_var(--color-green)_l_c_h_/_.15)]"
                             }`}
                         >
                             I want to work
-                        </button>
-                        <button
-                            {...(setRole !== undefined
-                                ? {
-                                      onClick: () =>
-                                          setRole((prev) => ({
-                                              isFreelancer: !prev.isFreelancer,
-                                              isClient: !prev.isClient,
-                                          })),
-                                  }
-                                : {})}
-                            className={`py-1.5 rounded-xl mb-2.5 ${
-                                role?.isFreelancer
-                                    ? "hover:bg-[oklch(from_var(--color-blue)_l_c_h_/_.15)]"
-                                    : "bg-primary font-bold text-white"
+                        </Link>
+                        <Link
+                            href={"/client"}
+                            className={`py-1.5 rounded-xl mb-2.5 font-primary text-center ${
+                                path === "/client"
+                                    ? "bg-primary font-bold text-white"
+                                    : "hover:bg-[oklch(from_var(--color-blue)_l_c_h_/_.15)]"
                             }`}
                         >
                             I want to hire
-                        </button>
+                        </Link>
                         <div className="flex gap-3">
                             <Link
                                 href={"/login"}

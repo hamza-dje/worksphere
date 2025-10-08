@@ -1,6 +1,12 @@
 import CategorySection from "@/components/categories/CategorySection";
 import Navbar from "@/components/navbar/landing/Navbar";
+import { Metadata } from "next";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+    title: "Categories",
+    description: "WorWave Freelance Skills",
+};
 
 export default function CategoriesPage() {
     const categories: Array<{ name: string; skills: Array<string> }> = [
@@ -112,7 +118,6 @@ export default function CategoriesPage() {
     ];
     return (
         <>
-            <Navbar />
             <section className="bg-gradient-to-r from-blue to-green rounded-b-[36px] mb-40 max-sm:mb-10 pt-[160px] pb-[80px] relative overflow-hidden">
                 <div className="absolute left-0 top-0 right-0 bottom-0 flex items-center justify-center">
                     <Image

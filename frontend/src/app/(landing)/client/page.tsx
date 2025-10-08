@@ -1,11 +1,14 @@
-"use client";
-import { useEffect, useState } from "react";
-import Navbar from "@/components/navbar/landing/Navbar";
 import Image from "next/image";
 import WhyCard from "@/components/landing/WhyCard";
 import { CategoryCard } from "@/components/landing/CategoryCard";
 import HowCard from "@/components/landing/HowCard";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Become a Client",
+    description: "Grow your business just from home",
+};
 
 type HowCardProps = {
     index: number;
@@ -15,19 +18,7 @@ type HowCardProps = {
     buttonContent?: string;
 };
 
-export default function LandingPage() {
-    const [role, setRole] = useState<{
-        isFreelancer: boolean;
-        isClient: boolean;
-    }>({ isFreelancer: true, isClient: false });
-    useEffect(() => {
-        if (role.isFreelancer) {
-            document.body.classList.remove("role-client");
-        } else {
-            document.body.classList.add("role-client");
-        }
-    }, [role.isFreelancer]);
-
+export default function ClientLandingPage() {
     const categoryCards = [
         {
             name: "Design & Creativity",
@@ -54,68 +45,57 @@ export default function LandingPage() {
     const howCards: Record<string, Array<Omit<HowCardProps, "index">>> = {
         firstSection: [
             {
-                color: role.isFreelancer ? "green" : "blue",
+                color: "blue",
                 title: "Share an offer",
                 paragraph:
                     "Share an offer of a service in our services marketplace, and wait for a client to hire you.",
                 buttonContent: "Share an offer",
             },
             {
-                color: role.isFreelancer ? "green" : "blue",
+                color: "blue",
                 title: "Make a deal",
-                paragraph: role.isFreelancer
-                    ? "The client tells you about what you wil do, so you use your skills and make his needs into reality, then you upload your work, so the client take it, once he approves it, you are good to go."
-                    : "Once a freelancer applies for it, he can start working on your project, you can contact him by our messaging system, to update him about the project he is working on.",
+                paragraph:
+                    "Once a freelancer applies for it, he can start working on your project, you can contact him by our messaging system, to update him about the project he is working on.",
             },
             {
-                color: role.isFreelancer ? "green" : "blue",
-                title: role.isFreelancer ? "Get paid" : "Pay the fee",
-                paragraph: role.isFreelancer
-                    ? "Once the client approved your delivery, you will get paid, which means the money will be sent and added to your balance in WorkWave, so you can withdraw it with the method you want, by the payment method you desire."
-                    : "Once you approve the freelancer’s final delivery, the service fee will be extracted from your balance, so the freelancer gets paid.",
+                color: "blue",
+                title: "Pay the fee",
+                paragraph:
+                    "Once you approve the freelancer’s final delivery, the service fee will be extracted from your balance, so the freelancer gets paid.",
             },
         ],
         secondSection: [
             {
-                color: role.isFreelancer ? "blue" : "green",
-                title: `Choose a ${role.isFreelancer ? "need" : "service"}`,
-                paragraph: role.isFreelancer
-                    ? "Consult client needs and choose one you are capable of doing within the client terms, then apply for it."
-                    : "Consult freelancers services and choose the one you need for your business.",
-                buttonContent: `Consult ${
-                    role.isFreelancer ? "needs" : "services"
-                }`,
+                color: "green",
+                title: "Choose a service",
+                paragraph:
+                    "Consult freelancers services and choose the one you need for your business.",
+                buttonContent: "Consult services",
             },
             {
-                color: role.isFreelancer ? "blue" : "green",
+                color: "green",
                 title: "Make a deal",
-                paragraph: role.isFreelancer
-                    ? "Once you get chosen by the client, you start working on his project, when you finalize it, you upload it so the client can take it, when the client approves it, you are good to go."
-                    : "Send the freelancer a brief of what you need so he can start working on your project, you can contact him by our messaging system, to update him about the project he is working on.",
+                paragraph:
+                    "Send the freelancer a brief of what you need so he can start working on your project, you can contact him by our messaging system, to update him about the project he is working on.",
             },
             {
-                color: role.isFreelancer ? "blue" : "green",
-                title: role.isFreelancer ? "Get paid" : "Pay the fee",
-                paragraph: role.isFreelancer
-                    ? "Once the client approved your delivery, you will get paid, which means the money will be sent and added to your balance in WorkWave, so you can withdraw it with the method you want, by the payment method you desire."
-                    : "Once you approve the freelancer’s final delivery, the service fee will be extracted from your balance, so the freelancer gets paid.",
+                color: "green",
+                title: "Pay the fee",
+                paragraph:
+                    "Once you approve the freelancer’s final delivery, the service fee will be extracted from your balance, so the freelancer gets paid.",
             },
         ],
     };
 
     return (
         <>
-            <Navbar role={role} setRole={setRole} />
-
             {/* Hero section */}
             <div className="flex flex-col gap-[200px] max-md:gap-[120px]">
                 <section className="h-screen bg-black flex items-center rounded-b-[36px] relative overflow-hidden">
                     {[1, 2, 3].map((imageId, i) => (
                         <Image
                             key={i}
-                            src={`/landing/hero/${
-                                role.isFreelancer ? "freelancer" : "client"
-                            }/${imageId}.png`}
+                            src={`/landing/hero/client/${imageId}.png`}
                             alt="Background"
                             width={1000}
                             height={1000}
@@ -136,31 +116,22 @@ export default function LandingPage() {
                                 </span>
                             </span>
                             <p className="font-secondary text-white text-[21.33px] max-md:text-lg tracking-[0.4px] mb-10">
-                                {role.isFreelancer
-                                    ? "Unlock opportunities to earn reliable income, all while working from home."
-                                    : "Connect with reliable talented freelances, and grow your business, just from home."}
+                                Connect with reliable talented freelances, and
+                                grow your business, just from home.
                             </p>
                             <div className="flex gap-[43px] max-sm:flex-col max-sm:gap-5 sm:items-center">
                                 <Link
                                     href={"/signup"}
                                     className="normal-button"
                                 >
-                                    {role.isFreelancer
-                                        ? "Find work opportunities"
-                                        : "Find freelance services"}
+                                    Find freelance services
                                 </Link>
-                                <button
+                                <Link
+                                    href={"/freelancer"}
                                     className="font-primary font-bold cursor-pointer max-md:text-sm"
-                                    onClick={() =>
-                                        setRole((prev) => ({
-                                            isFreelancer: !prev.isFreelancer,
-                                            isClient: !prev.isClient,
-                                        }))
-                                    }
                                 >
-                                    I want to{" "}
-                                    {role.isFreelancer ? "hire" : "work"}
-                                </button>
+                                    I want to work
+                                </Link>
                             </div>
                         </div>
                     </div>
