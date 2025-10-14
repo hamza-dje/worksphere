@@ -15,8 +15,11 @@ export default function AccountCreated({
             skipAllowed={accountType === "client"}
         >
             <p className="col-span-full text-center text-xl">
-                Your account has been created successfully! Just one more step.
-                We should set up your profile to look more professional.
+                Your account has been created successfully!
+                <br />
+                <br />
+                Just one more step. We should set up your profile to look more
+                professional.
             </p>
         </SignUpFormWrapper>
     );

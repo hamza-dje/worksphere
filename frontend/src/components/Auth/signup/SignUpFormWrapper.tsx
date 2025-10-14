@@ -10,6 +10,7 @@ export default function SignUpFormWrapper({
     children,
     accountType,
     skipAllowed = false,
+    skipContent = "Skip for now",
 }: {
     header: string;
     headerDescription: string;
@@ -19,6 +20,7 @@ export default function SignUpFormWrapper({
     children: ReactNode;
     accountType: "client" | "freelancer";
     skipAllowed?: boolean;
+    skipContent?: string;
 }) {
     return (
         <>
@@ -59,7 +61,7 @@ export default function SignUpFormWrapper({
                         type="button"
                         className="font-primary font-bold text-sm opacity-20 col-span-full text-end cursor-pointer"
                     >
-                        Skip for now
+                        {skipContent}
                     </button>
                 )}
             </form>
