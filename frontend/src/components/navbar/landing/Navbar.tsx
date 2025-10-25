@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 
 export default function Navbar() {
     const path = usePathname();
-    console.log(path === "/client");
 
     const [menuExpanded, setMenuExpanded] = useState<boolean>(false);
     const responsiveMenuRef = useRef<HTMLDivElement>(null);

@@ -61,7 +61,7 @@ export default function ProfileAppearance() {
                 placeholder="About..."
                 rows={3}
                 className="col-span-full resize-none"
-            ></textarea>
+            />
         </SignUpFormWrapper>
     );
 }
