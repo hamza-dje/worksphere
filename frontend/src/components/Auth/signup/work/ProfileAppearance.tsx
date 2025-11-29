@@ -55,7 +55,7 @@ export default function ProfileAppearance() {
                     <span className="text-xl">Hamza Djedidi</span>
                 </div>
             </div>
-
+            <div></div>
             <textarea
                 name="about"
                 placeholder="About..."

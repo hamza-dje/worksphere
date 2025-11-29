@@ -1,7 +1,11 @@
+'use client'
+import { useUserStore } from "@/store/store";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function SignUpPage() {
+    const setRole = useUserStore((state) => state.setRole);
+   
     return (
         <div className="w-[840px] max-lg:w-[700px] max-md:w-[600px] max-sm:w-[calc(100%-32px)] flex flex-col gap-20 mx-auto mt-16 max-sm:mt-20">
             <Link
@@ -24,6 +28,7 @@ export default function SignUpPage() {
                 <Link
                     href={"/signup/hire"}
                     className="flex-1 relative flex flex-col gap-2.5 px-10 py-8 rounded-[40px] border-1 border-[oklch(from_var(--color-black)_l_c_h_/_.1)] hover:bg-[oklch(from_var(--color-blue)_l_c_h_/_.8)] hover:border-transparent hover:shadow-[0_0_20px_0_rgba(0,0,0,.2)] duration-300 group"
+                    onClick={() => setRole("client")}
                 >
                     <Image
                         src={"/signup/welcome/hire.png"}
@@ -44,6 +49,7 @@ export default function SignUpPage() {
                 <Link
                     href={"/signup/work"}
                     className="flex-1 relative flex flex-col gap-2.5 px-10 py-8 rounded-[40px] border-1 border-[oklch(from_var(--color-black)_l_c_h_/_.1)] hover:bg-[oklch(from_var(--color-green)_l_c_h_/_.8)] hover:border-transparent hover:shadow-[0_0_20px_0_rgba(0,0,0,.2)] duration-300 group"
+                    onClick={() => setRole("freelancer")}
                 >
                     <Image
                         src={"/signup/welcome/work.png"}
