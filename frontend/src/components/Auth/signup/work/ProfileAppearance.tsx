@@ -2,6 +2,7 @@
 import Image from "next/image";
 import SignUpFormWrapper from "../SignUpFormWrapper";
 import { ChangeEvent, useState } from "react";
+import { SignUpDto } from "@/utils/types/validation/schemas";
 type Props = {
     header : string,
     headerDescription : string,
@@ -10,8 +11,9 @@ type Props = {
     skipAllowed? : boolean,
     children?: React.ReactNode,
     handle?: (data: any) => Promise<void>
+    change : SignUpDto
 };
-export default function ProfileAppearance({header, headerDescription, submitButtonContent, accountType, skipAllowed, children, handle} : Props) {
+export default function ProfileAppearance({header, headerDescription, submitButtonContent, accountType, skipAllowed, children, handle , change} : Props) {
     const [image, setImage] = useState<string | ArrayBuffer | null>(null);
     const handleUpload = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -30,6 +32,7 @@ export default function ProfileAppearance({header, headerDescription, submitButt
             accountType={accountType}
             skipAllowed={skipAllowed}
             handle={handle}
+            change = {change}
         >
            {children}
         </SignUpFormWrapper>

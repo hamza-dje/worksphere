@@ -11,9 +11,10 @@ import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { SignUpDto, signUpSchema } from "@/utils/types/validation/schemas";
 import { signUp } from "@/api/services/auth";
-import { toast } from "react-hot-toast/headless";
+import { toast } from "react-hot-toast";
 
 export default function SignUpFreelancerPage() {
+    const [submitted , setSubmitted] = useState(false);
   const {
     register,
     handleSubmit,
@@ -22,6 +23,7 @@ export default function SignUpFreelancerPage() {
     resolver: zodResolver(signUpSchema),
     mode: "onChange",
   });
+  console.log(errors.password);
   const [image, setImage] = useState<string | ArrayBuffer | null>(null);
   const [handleChange, setHandleChange] = useState<SignUpDto>({
     firstName: "",
@@ -31,12 +33,18 @@ export default function SignUpFreelancerPage() {
   });
   const handleSignUp = async (data: SignUpDto): Promise<void> => {
     const valid = signUpSchema.safeParse(data);
-    if (!valid.success) return;
-    const result = await signUp(handleChange);
+    console.log("mohamed")
+    if (!valid.success) {
+        console.log("semai")
+        toast.error("Please fill all fields correctly.");
+        return;
+    }
+        const result = await signUp(handleChange);
     if ((result as any).error) {
       toast.error(`Signup failed: ${(result as any).error}`);
     } else {
       toast.success("Account created successfully!");
+      setSubmitted(true);
     }
   };
   return (
@@ -46,7 +54,8 @@ export default function SignUpFreelancerPage() {
       submitButtonContent="Continue"
       accountType="freelancer"
       skipAllowed
-      handle={handleSignUp(handleChange)}
+      handle={handleSignUp}
+      change = {handleChange}
     >
       <InputField
         type="text"
@@ -61,6 +70,7 @@ export default function SignUpFreelancerPage() {
       {errors.firstName && (
         <div className="text-red-500 col-span-full  text-sm w-full">
           {errors.firstName.message}
+         
         </div>
       )}
 

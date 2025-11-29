@@ -25,21 +25,13 @@ export const metadata: Metadata = {
     }
 };
 
-export default function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
-    return (
-        <html
-            lang="en"
-            className={`${unbounded.variable} ${redHatDisplay.variable}`}
-        >
-            {children}
-        <body>
-                <Toaster position="top-right" reverseOrder={false} />
-        </body>
-
-        </html>
-    );
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        <Toaster position="top-right" reverseOrder={false} /> 
+      </body>
+    </html>
+  );
 }

@@ -1,4 +1,5 @@
 "use client";
+import { SignUpDto } from "@/utils/types/validation/schemas";
 import { ReactNode } from "react";
 
 export default function SignUpFormWrapper({
@@ -12,6 +13,7 @@ export default function SignUpFormWrapper({
     skipAllowed = false,
     skipContent = "Skip for now",
     handle,
+    change
 }: {
     header: string;
     headerDescription: string;
@@ -23,7 +25,9 @@ export default function SignUpFormWrapper({
     skipAllowed?: boolean;
     skipContent?: string;
     handle?: (data: any) => Promise<void>;
+    change : SignUpDto
 }) {
+    console.log("Change in Wrapper:", change)
     return (
         <>
             <div className="pt-6 pl-[30px]">
@@ -42,8 +46,8 @@ export default function SignUpFormWrapper({
                     {headerDescription}
                 </p>
             </div>
-            <form
-                onSubmit={(e) => e.preventDefault()}
+            <div
+               
                 className={`${
                     formCustomClassName
                         ? formCustomClassName
@@ -52,8 +56,10 @@ export default function SignUpFormWrapper({
             >
                 {children}
                 <button
-                    onClick={()=>{handle}}
-                    type="submit"
+                    type="button"
+                    onClick={() => {
+                        handle && handle(change);
+                    }}
                     className={`${submitButtonClassName} big-button col-span-full mt-7 duration-300`}
                 >
                     {submitButtonContent}
@@ -66,7 +72,7 @@ export default function SignUpFormWrapper({
                     >
                     </button>
                 )}
-            </form>
+            </div>
            
         </>
     );
