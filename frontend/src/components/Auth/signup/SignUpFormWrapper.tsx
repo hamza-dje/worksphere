@@ -61,95 +61,10 @@ export default function SignUpFormWrapper({
                         type="button"
                         className="font-primary font-bold text-sm opacity-20 col-span-full text-end cursor-pointer"
                     >
-                        {skipContent}
                     </button>
                 )}
             </form>
-            {accountType === "client" ? (
-                <div className="max-sm:pt-10 flex gap-4 mt-auto mx-auto pb-[30px] w-[500px] max-sm:w-[calc(100%-32px)]">
-                    <div className="flex-2 flex flex-col gap-1">
-                        <span
-                            className={`text-sm ${
-                                false
-                                    ? "font-bold text-green"
-                                    : "font-medium text-[oklch(from_var(--color-black)_l_c_h_/_.2)]"
-                            }`}
-                        >
-                            Personal infos
-                        </span>
-                        <div className="w-full h-1 bg-[oklch(from_var(--color-black)_l_c_h_/_.2)] rounded-full">
-                            <span
-                                className="bg-green h-full rounded-full block"
-                                style={{
-                                    width: `${25}%`,
-                                }}
-                            />
-                        </div>
-                    </div>
-
-                    <div className="flex-1 flex flex-col gap-1">
-                        <span
-                            className={`text-sm ${
-                                false
-                                    ? "font-bold text-green"
-                                    : "font-medium text-[oklch(from_var(--color-black)_l_c_h_/_.2)]"
-                            }`}
-                        >
-                            Set up your profile
-                        </span>
-                        <div className="w-full h-1 bg-[oklch(from_var(--color-black)_l_c_h_/_.2)] rounded-full">
-                            <span
-                                className="bg-green h-full rounded-full block"
-                                style={{
-                                    width: `${0}%`,
-                                }}
-                            />
-                        </div>
-                    </div>
-                </div>
-            ) : (
-                <div className="max-sm:pt-10 flex gap-4 mt-auto mx-auto pb-[30px] w-[500px] max-sm:w-[calc(100%-32px)]">
-                    <div className="flex-1 flex flex-col gap-1">
-                        <span
-                            className={`text-sm ${
-                                false
-                                    ? "font-bold text-green"
-                                    : "font-medium text-[oklch(from_var(--color-black)_l_c_h_/_.2)]"
-                            }`}
-                        >
-                            Personal infos
-                        </span>
-                        <div className="w-full h-1 bg-[oklch(from_var(--color-black)_l_c_h_/_.2)] rounded-full">
-                            <span
-                                className="bg-green h-full rounded-full block"
-                                style={{
-                                    width: `${25}%`,
-                                }}
-                            />
-                        </div>
-                    </div>
-
-                    <div className="flex-1 flex flex-col gap-1">
-                        <span
-                            className={`text-sm ${
-                                false
-                                    ? "font-bold text-green"
-                                    : "font-medium text-[oklch(from_var(--color-black)_l_c_h_/_.2)]"
-                            }`}
-                        >
-                            Set up your profile
-                        </span>
-                        <div className="w-full h-1 bg-[oklch(from_var(--color-black)_l_c_h_/_.2)] rounded-full">
-                            <span
-                                className="bg-green h-full rounded-full block"
-                                style={{
-                                    width: `${0}%`,
-                                }}
-                            />
-                        </div>
-                    </div>
-                </div>
-            )}
+           
         </>
     );
 }
