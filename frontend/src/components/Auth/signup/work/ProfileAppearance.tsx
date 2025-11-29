@@ -2,8 +2,14 @@
 import Image from "next/image";
 import SignUpFormWrapper from "../SignUpFormWrapper";
 import { ChangeEvent, useState } from "react";
-
-export default function ProfileAppearance() {
+type Props = {
+    header : string,
+    headerDescription : string,
+    submitButtonContent : string,
+    accountType : "client" | "freelancer",
+    skipAllowed? : boolean
+};
+export default function ProfileAppearance({header, headerDescription, submitButtonContent, accountType, skipAllowed} : Props) {
     const [image, setImage] = useState<string | ArrayBuffer | null>(null);
     const handleUpload = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -16,11 +22,11 @@ export default function ProfileAppearance() {
 
     return (
         <SignUpFormWrapper
-            header="Setting up your profile"
-            headerDescription="Your profile appearance"
-            submitButtonContent="Finish"
-            accountType="freelancer"
-            skipAllowed
+            header={header}
+            headerDescription={headerDescription}
+            submitButtonContent={submitButtonContent}
+            accountType={accountType}
+            skipAllowed={skipAllowed}
         >
             <div className="col-span-full flex items-center gap-5">
                 <div className="group rounded-full overflow-hidden relative border-1 border-[oklch(from_var(--color-black)_l_c_h_/_.1)]">
@@ -55,7 +61,7 @@ export default function ProfileAppearance() {
                     <span className="text-xl">Hamza Djedidi</span>
                 </div>
             </div>
-            <div></div>
+
             <textarea
                 name="about"
                 placeholder="About..."
