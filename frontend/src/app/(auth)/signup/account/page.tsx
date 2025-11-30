@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import AccountCreated from "@/components/auth/signup/shared/AccountCreated";
 import StepOne from "@/components/auth/signup/shared/StepOne";
 import ChooseSkills from "@/components/auth/signup/work/ChooseSkills";
@@ -16,17 +16,17 @@ import { useUserStore } from "@/store/store";
 import { useRouter } from "next/navigation";
 
 export default function SignUpFreelancerPage() {
-    const router = useRouter();
-    const role = useUserStore((state)=> state.role)
-    const [submitted , setSubmitted] = useState(false);
- const {
-  control,
-  handleSubmit,
-  formState: { errors },
-} = useForm({
-  resolver: zodResolver(signUpSchema),
-  mode: "onChange",
-});
+  const router = useRouter();
+  const role = useUserStore((state) => state.role);
+  const [submitted, setSubmitted] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(signUpSchema),
+    mode: "onChange",
+  });
 
   console.log(errors.password);
   const [image, setImage] = useState<string | ArrayBuffer | null>(null);
@@ -40,15 +40,15 @@ export default function SignUpFreelancerPage() {
   const handleSignUp = async (data: SignUpDto): Promise<void> => {
     const valid = signUpSchema.safeParse(data);
     if (!valid.success) {
-        toast.error("Please fill all fields correctly.");
-        return;
+      toast.error("Please fill all fields correctly.");
+      return;
     }
-        const result = await signUp(handleChange);
+    const result = await signUp(handleChange);
     if ((result as any).error) {
       toast.error(`Signup failed: ${(result as any).error}`);
     } else {
       toast.success("Account created successfully!");
-       router.push('../login')
+      router.push("../login");
     }
   };
   return (
@@ -59,7 +59,7 @@ export default function SignUpFreelancerPage() {
       accountType="freelancer"
       skipAllowed
       handle={handleSignUp}
-      change = {handleChange}
+      change={handleChange}
     >
       <InputField
         type="text"
@@ -69,12 +69,10 @@ export default function SignUpFreelancerPage() {
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           setHandleChange({ ...handleChange, firstName: e.target.value })
         }
-        
       />
       {errors.firstName && (
         <div className="text-red-500 absolute mt-[68px]  text-sm ">
           {errors.firstName.message}
-         
         </div>
       )}
 
@@ -86,7 +84,6 @@ export default function SignUpFreelancerPage() {
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           setHandleChange({ ...handleChange, lastName: e.target.value })
         }
-        
       />
       {errors.lastName && (
         <div className="text-red-500 absolute mt-[160px]  text-sm ">
@@ -94,15 +91,14 @@ export default function SignUpFreelancerPage() {
         </div>
       )}
 
-        <InputField
-            type="email"
-            placeholder="Email"
-            name="email"
-            control={control}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setHandleChange({ ...handleChange, email: e.target.value })
-            }
-        
+      <InputField
+        type="email"
+        placeholder="Email"
+        name="email"
+        control={control}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setHandleChange({ ...handleChange, email: e.target.value })
+        }
       />
       {errors.email && (
         <div className="text-red-500 absolute mt-[252px]  text-sm ">
@@ -118,7 +114,6 @@ export default function SignUpFreelancerPage() {
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           setHandleChange({ ...handleChange, password: e.target.value })
         }
-       
       />
       {errors.password && (
         <div className="text-red-500 absolute mt-[346px]  text-sm ">
@@ -128,4 +123,3 @@ export default function SignUpFreelancerPage() {
     </ProfileAppearance>
   );
 }
-

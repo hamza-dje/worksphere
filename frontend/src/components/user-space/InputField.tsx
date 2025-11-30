@@ -9,7 +9,14 @@ type Props = {
   className?: string;
 };
 
-export const InputField = ({ type, placeholder, name, control, onChange, className }: Props) => {
+export const InputField = ({
+  type,
+  placeholder,
+  name,
+  control,
+  onChange,
+  className,
+}: Props) => {
   return (
     <Controller
       name={name}
@@ -21,9 +28,9 @@ export const InputField = ({ type, placeholder, name, control, onChange, classNa
           value={field.value || ""}
           onChange={(e) => {
             field.onChange(e); // update RHF + run Zod validation
-            onChange?.(e);     // your custom update
+            onChange?.(e); // your custom update
           }}
-          className={`col-span-full resize-none ${className }`}
+          className={`col-span-full resize-none ${className}`}
         />
       )}
     />

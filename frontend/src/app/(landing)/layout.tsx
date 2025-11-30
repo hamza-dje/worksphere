@@ -2,12 +2,12 @@ import Navbar from "@/components/navbar/landing/Navbar";
 import React from "react";
 
 export default function LandingLayout({
-    children,
+  children,
 }: Readonly<{ children: React.ReactNode }>) {
-    return (
-        <body>
-            <Navbar />
-            {children}
-        </body>
-    );
+  return (
+    <body>
+      <Navbar />
+      {children}
+    </body>
+  );
 }

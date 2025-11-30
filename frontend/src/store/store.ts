@@ -7,7 +7,7 @@ export enum UserRole {
 }
 
 interface UserStore {
-  role: UserRole ;
+  role: UserRole;
   setRole: (role: UserRole) => void;
 }
 

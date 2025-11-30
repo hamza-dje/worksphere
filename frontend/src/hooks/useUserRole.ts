@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 
 export default function useUserRole() {
-    const getUserRole = (): "freelancer" | "client" => {
-        return "freelancer";
-    };
+  const getUserRole = (): "freelancer" | "client" => {
+    return "freelancer";
+  };
 
-    const userRole = getUserRole();
+  const userRole = getUserRole();
 
-    useEffect(() => {
-        document.body.classList.add(`role-${userRole}`);
-    }, []);
+  useEffect(() => {
+    document.body.classList.add(`role-${userRole}`);
+  }, []);
 
-    return userRole;
+  return userRole;
 }

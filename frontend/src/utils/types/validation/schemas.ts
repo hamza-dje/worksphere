@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-
 export const signUpSchema = z.object({
   firstName: z
     .string()
@@ -12,8 +11,7 @@ export const signUpSchema = z.object({
     .min(2, "Last name is required")
     .max(50, "Last name is too long"),
 
-  email: z
-    .email("Email must be valid"),
+  email: z.email("Email must be valid"),
 
   password: z
     .string()
@@ -22,16 +20,16 @@ export const signUpSchema = z.object({
     .regex(/(?=.*[0-9])/, "Password must contain at least one number")
     .optional(),
 
-  role: z.enum(["client", "admin", "freelancer"], "Role must be client, admin, or freelancer"),
-
+  role: z.enum(
+    ["client", "admin", "freelancer"],
+    "Role must be client, admin, or freelancer",
+  ),
 });
 
-export type SignUpDto = z.infer<typeof signUpSchema>
-
+export type SignUpDto = z.infer<typeof signUpSchema>;
 
 export const signInSchema = z.object({
-  email: z
-    .email("Email must be valid"),
+  email: z.email("Email must be valid"),
 
   password: z
     .string()
@@ -39,10 +37,9 @@ export const signInSchema = z.object({
     .regex(/(?=.*[A-Z])/, "Password must contain at least one uppercase letter")
     .regex(/(?=.*[0-9])/, "Password must contain at least one number"),
 });
-export type SignInDto = z.infer<typeof signInSchema>
+export type SignInDto = z.infer<typeof signInSchema>;
 
-
-const MAX_FILE_SIZE = 5 * 1024 * 1024; 
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const ALLOWED_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
 
 export const portfolioSchema = z.object({
@@ -51,17 +48,6 @@ export const portfolioSchema = z.object({
     .min(10, "Mobile number is required")
     .max(15, "Mobile number is too long"),
 
-  photo: z
-    .instanceof(File)
-    .refine(
-      (file) => ALLOWED_TYPES.includes(file.type),
-      "Photo must be one of: jpg, jpeg, png, gif"
-    )
-    .refine(
-      (file) => file.size <= MAX_FILE_SIZE,
-      "Photo must be less than 5MB"
-    )
-    .optional(),
 
   description: z
     .string()
@@ -73,10 +59,7 @@ export const portfolioSchema = z.object({
     .min(2, "Location is required")
     .max(100, "Location is too long"),
 
-  portfolioLink: z
-    .url("Portfolio link must be a valid URL")
-    .optional(),
+  portfolioLink: z.url("Portfolio link must be a valid URL").optional(),
 });
 
-
-export type PortfolioDto = z.infer<typeof portfolioSchema>
+export type PortfolioDto = z.infer<typeof portfolioSchema>;

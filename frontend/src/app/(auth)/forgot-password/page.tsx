@@ -1,3 +1,3 @@
 export default function ForgotPasswordPage() {
-    return <div className="m-auto w-fit">Forgot Password</div>;
+  return <div className="m-auto w-fit">Forgot Password</div>;
 }

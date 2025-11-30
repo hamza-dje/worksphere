@@ -1,60 +1,60 @@
 import Link from "next/link";
 
 type HowCardProps = {
-    index: number;
-    color: "green" | "blue";
-    title: string;
-    paragraph: string;
-    buttonContent?: string;
+  index: number;
+  color: "green" | "blue";
+  title: string;
+  paragraph: string;
+  buttonContent?: string;
 };
 
 export default function HowCard({
-    index,
-    color,
-    title,
-    paragraph,
-    buttonContent,
+  index,
+  color,
+  title,
+  paragraph,
+  buttonContent,
 }: HowCardProps) {
-    return (
-        <div
-            className="col-span-4 max-xl:col-span-2 max-lg:col-span-full flex flex-col gap-3 max-md:gap-2 px-10 py-8 bg-[oklch(from_var(--color-custom)_l_c_h_/_.15)] rounded-[36px] relative overflow-hidden"
-            style={
-                {
-                    "--color-custom": `var(--color-${color})`,
-                } as React.CSSProperties
-            }
+  return (
+    <div
+      className="col-span-4 max-xl:col-span-2 max-lg:col-span-full flex flex-col gap-3 max-md:gap-2 px-10 py-8 bg-[oklch(from_var(--color-custom)_l_c_h_/_.15)] rounded-[36px] relative overflow-hidden"
+      style={
+        {
+          "--color-custom": `var(--color-${color})`,
+        } as React.CSSProperties
+      }
+    >
+      <span className="absolute top-0 h-full right-[20px] max-xl:right-2.5 -z-[1] opacity-15">
+        <span
+          className="absolute top-[50%] translate-y-[-50%] right-0 font-primary font-black text-[213px] text-[var(--color-custom)] "
+          style={{
+            WebkitTextStroke: "20px",
+            paintOrder: "stroke fill",
+          }}
         >
-            <span className="absolute top-0 h-full right-[20px] max-xl:right-2.5 -z-[1] opacity-15">
-                <span
-                    className="absolute top-[50%] translate-y-[-50%] right-0 font-primary font-black text-[213px] text-[var(--color-custom)] "
-                    style={{
-                        WebkitTextStroke: "20px",
-                        paintOrder: "stroke fill",
-                    }}
-                >
-                    {index}
-                </span>
-                <span className="absolute top-[50%] translate-y-[-50%] right-0 font-primary font-black text-[213px] text-white">
-                    {index}
-                </span>
-            </span>
+          {index}
+        </span>
+        <span className="absolute top-[50%] translate-y-[-50%] right-0 font-primary font-black text-[213px] text-white">
+          {index}
+        </span>
+      </span>
 
-            <h4 className="font-primary font-extrabold text-[28px] max-md:text-2xl text-[var(--color-custom)]">
-                {title}
-            </h4>
+      <h4 className="font-primary font-extrabold text-[28px] max-md:text-2xl text-[var(--color-custom)]">
+        {title}
+      </h4>
 
-            <p className="text-lg max-md:text-[16px] leading-6 max-md:leading-snug tracking-wide">
-                {paragraph}
-            </p>
+      <p className="text-lg max-md:text-[16px] leading-6 max-md:leading-snug tracking-wide">
+        {paragraph}
+      </p>
 
-            {buttonContent && (
-                <Link
-                    href={"/signup"}
-                    className="font-primary font-bold text-sm px-5 py-2 border-2 border-[var(--color-custom)] text-[var(--color-custom)] sm:self-center rounded-[14px] hover:bg-[var(--color-custom)] hover:text-white transition duration-200 ease-out cursor-pointer mt-5"
-                >
-                    {buttonContent}
-                </Link>
-            )}
-        </div>
-    );
+      {buttonContent && (
+        <Link
+          href={"/signup"}
+          className="font-primary font-bold text-sm px-5 py-2 border-2 border-[var(--color-custom)] text-[var(--color-custom)] sm:self-center rounded-[14px] hover:bg-[var(--color-custom)] hover:text-white transition duration-200 ease-out cursor-pointer mt-5"
+        >
+          {buttonContent}
+        </Link>
+      )}
+    </div>
+  );
 }
