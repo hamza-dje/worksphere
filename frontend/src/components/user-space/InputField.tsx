@@ -6,9 +6,10 @@ type Props = {
   name: string;
   control: any; // control must be passed from parent
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
 };
 
-export const InputField = ({ type, placeholder, name, control, onChange }: Props) => {
+export const InputField = ({ type, placeholder, name, control, onChange, className }: Props) => {
   return (
     <Controller
       name={name}
@@ -22,7 +23,7 @@ export const InputField = ({ type, placeholder, name, control, onChange }: Props
             field.onChange(e); // update RHF + run Zod validation
             onChange?.(e);     // your custom update
           }}
-          className="col-span-full resize-none"
+          className={`col-span-full resize-none ${className }`}
         />
       )}
     />

@@ -6,10 +6,13 @@ import ChooseSkills from "@/components/auth/signup/work/ChooseSkills";
 import ProfileAppearance from "@/components/Auth/signup/work/ProfileAppearance";
 import ProfileFinished from "@/components/auth/signup/work/ProfileFinished";
 import { InputField } from "@/components/user-space/InputField";
-import { PortfolioDto, SignUpDto } from "@/utils/types/validation/schemas";
+import { Validation } from "@/components/user-space/validation";
+import { PortfolioDto, portfolioSchema, SignUpDto } from "@/utils/types/validation/schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { sign } from "crypto";
 import Image from "next/image";
 import { ChangeEvent, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 export default function SignUpFreelancerPage() {
@@ -20,21 +23,26 @@ export default function SignUpFreelancerPage() {
         role: "freelancer",
     });
     const [portfolio, setPortfolio] = useState<PortfolioDto>({
-         mobile: '',
-         description: '',
-         location: '',
-         photo: undefined,
-          portfolioLink: undefined,
+        mobile: '',
+        description: '',
+        location: '',
+        photo: undefined,
+        portfolioLink: undefined,
     });
-    const [image, setImage] = useState<string | ArrayBuffer | null>(null);
-            const handleUpload = (e: ChangeEvent<HTMLInputElement>) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = () => setImage(reader.result);
-                    reader.readAsDataURL(file);
-                }
-            };
+     const {
+          control,
+          handleSubmit,
+          formState: { errors },
+        } = useForm({
+          resolver: zodResolver(portfolioSchema),
+          mode: "onChange",
+        });
+           const handleUpload = (e: ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  if (file) {
+    setPortfolio({ ...portfolio, photo: file });
+  }
+};
     useEffect(()=>{
         const fetchProfile = async (): Promise<void> => {
     
@@ -50,7 +58,7 @@ export default function SignUpFreelancerPage() {
   fetchProfile();
     }, [])
     return <ProfileAppearance header="Setting up your profile" headerDescription="Your profile appearance" submitButtonContent="Finish" accountType="freelancer" skipAllowed >
-        <div className="col-span-full flex items-center gap-5">
+        <div className="col-span-full flex items-center gap-5 ">
                             <div className="group rounded-full overflow-hidden relative border-1 border-[oklch(from_var(--color-black)_l_c_h_/_.1)]">
                                 <Image
                                     src={"/profile/plus-icon.png"}
@@ -61,7 +69,9 @@ export default function SignUpFreelancerPage() {
                                 />
                                 <input
                                     type="file"
-                                    onChange={handleUpload}
+                                    onChange={(e : ChangeEvent<HTMLInputElement>) => {
+                                        handleUpload(e);
+                                    }}
                                     id="profile-picture"
                                     accept="image/*"
                                     name="profile-picture"
@@ -84,11 +94,47 @@ export default function SignUpFreelancerPage() {
                             </div>
                         </div>
             
-                       <InputField></InputField>
-                       <InputField></InputField>
-                       <InputField></InputField>
-                       <InputField></InputField>
-                       <InputField></InputField>
+                       <InputField type="text" placeholder="description" name="description" control={control} onChange={(e : ChangeEvent<HTMLInputElement>) => setPortfolio({...portfolio, description: e.target.value})}></InputField>
+                       <Validation error={errors.description}></Validation>
+                       <InputField type="text" placeholder="portfolio link" name="portfolioLink" control={control} onChange={(e : ChangeEvent<HTMLInputElement>) => setPortfolio({...portfolio, portfolioLink: e.target.value})}></InputField>
+                       <Validation error={errors.portfolioLink}></Validation>
+                       <div className="col-span-full flex gap-5 w-full">
+ <div className="flex gap-1 flex-col">
+     <InputField
+    className="w-full"
+    type="text"
+    placeholder="location"
+    name="location"
+    control={control}
+    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+      setPortfolio({ ...portfolio, location: e.target.value })
+    }
+  />
+  <Validation error={errors.location}></Validation>
+ </div>
+  <div className="flex gap-1 flex-col">
+    <InputField
+    className="w-full"
+    type="text"
+    placeholder="mobile"
+    name="mobile"
+    control={control}
+    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+      setPortfolio({ ...portfolio, mobile: e.target.value })
+    }
+  />
+  <Validation error={errors.mobile}></Validation>
+  </div>
+</div>
+
+                       
     </ProfileAppearance>
 }
 
+/**
+   mobile: '',
+        description: '',
+        location: '',
+        photo: undefined,
+        portfolioLink: undefined,
+ */
