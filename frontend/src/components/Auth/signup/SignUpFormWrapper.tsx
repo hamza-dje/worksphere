@@ -1,5 +1,5 @@
 "use client";
-import { SignUpDto } from "@/utils/types/validation/schemas";
+import { SignUpDto } from "@/utils/types/validation/user";
 import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
 

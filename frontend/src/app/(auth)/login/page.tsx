@@ -1,9 +1,9 @@
 "use client";
-import { signIn } from "@/api/services/auth";
+import { signIn } from "@/api/rest/services/auth";
 import AuthButton from "@/components/Auth/AuthButton";
 import { InputField } from "@/components/user-space/InputField";
 import { Validation } from "@/components/user-space/validation";
-import { SignInDto, signInSchema } from "@/utils/types/validation/schemas";
+import { SignInDto, signInSchema } from "@/utils/types/validation/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
@@ -54,7 +54,7 @@ export default function LoginPage() {
           <div className="flex flex-col items-center mb-[52px] text-center">
             <h1>Welcome!</h1>
             <p className="opacity-60 text-[18px] max-sm:text-sm">
-              Sign in to continue to WorkWave.
+              Sign in to continue to WorkSpher.
             </p>
           </div>
 
@@ -89,7 +89,7 @@ export default function LoginPage() {
               href=""
               className="opacity-50 hover:opacity-100 duration-200 transition-opacity"
             >
-              New to WorkWave?
+              New to WorkSpher?
             </Link>
             <Link
               href=""
@@ -105,7 +105,13 @@ export default function LoginPage() {
             <hr className="w-full" />
           </div>
           <div className="relative  h-16  flex justify-center items-center w-full">
-            <AuthButton onClick={()=> {router.push(`${process.env.NEXT_PUBLIC_API_URL}/auth/google`)}} platform="google" className="" />
+            <AuthButton
+              onClick={() => {
+                router.push(`${process.env.NEXT_PUBLIC_API_URL}/auth/google`);
+              }}
+              platform="google"
+              className=""
+            />
           </div>
         </div>
       </div>

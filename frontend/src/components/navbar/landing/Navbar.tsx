@@ -42,7 +42,7 @@ export default function Navbar() {
           <span className="font-bold font-primary bg-gradient-to-r from-green to-blue bg-clip-text text-transparent text-[27px] max-sm:hidden">
             Work
             <span className="font-black font-primary text-transparent">
-              Wave
+              Spher
             </span>
           </span>
         </div>

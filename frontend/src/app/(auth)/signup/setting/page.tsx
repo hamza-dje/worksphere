@@ -1,11 +1,7 @@
 "use client";
-import { createPortfolio } from "@/api/services/portfolio";
-import { getProfile } from "@/api/services/user";
-import AccountCreated from "@/components/auth/signup/shared/AccountCreated";
-import StepOne from "@/components/auth/signup/shared/StepOne";
-import ChooseSkills from "@/components/auth/signup/work/ChooseSkills";
+import { createPortfolio } from "@/api/rest/services/portfolio";
+import { getProfile } from "@/api/rest/services/user";
 import ProfileAppearance from "@/components/Auth/signup/work/ProfileAppearance";
-import ProfileFinished from "@/components/auth/signup/work/ProfileFinished";
 import { InputField } from "@/components/user-space/InputField";
 import { Validation } from "@/components/user-space/validation";
 import { useUserStore } from "@/store/store";
@@ -13,7 +9,7 @@ import {
   PortfolioDto,
   portfolioSchema,
   SignUpDto,
-} from "@/utils/types/validation/schemas";
+} from "@/utils/types/validation/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { sign } from "crypto";
 import Image from "next/image";
@@ -52,25 +48,25 @@ export default function SignUpFreelancerPage() {
       setFile(file);
     }
   };
-  
+
   const handleCreatePortfolio = async (): Promise<void> => {
-      const valid = portfolioSchema.safeParse(portfolio);
-      if (!valid.success) {
-        toast.error("Please fill all fields correctly.");
-        return;
-      }
-      const result = await createPortfolio(portfolio, file);
-      if ((result as any).error) {
-        toast.error(`Creating portfolio failed: ${(result as any).error}`);
+    const valid = portfolioSchema.safeParse(portfolio);
+    if (!valid.success) {
+      toast.error("Please fill all fields correctly.");
+      return;
+    }
+    const result = await createPortfolio(portfolio, file);
+    if ((result as any).error) {
+      toast.error(`Creating portfolio failed: ${(result as any).error}`);
+    } else {
+      toast.success("Portfolio created successfully!");
+      if (profile.role === "freelancer") {
+        router.push("/frl");
       } else {
-        toast.success("Portfolio created successfully!");
-        if(profile.role === "freelancer"){
-          router.push("/");
-        } else {
-          router.push("/client");
-        }
+        router.push("/clt");
       }
-    };
+    }
+  };
 
   useEffect(() => {
     const fetchProfile = async (): Promise<void> => {

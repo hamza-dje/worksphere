@@ -1,6 +1,6 @@
 import { Sign } from "crypto";
 import api, { errorHandler } from "../api";
-import { SignUpDto } from "@/utils/types/validation/schemas";
+import { SignUpDto } from "@/utils/types/validation/user";
 
 export const getProfile = async () => {
   try {

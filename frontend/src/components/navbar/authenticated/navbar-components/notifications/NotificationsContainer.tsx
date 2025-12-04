@@ -1,13 +1,14 @@
 import NotificationProps from "@/utils/types/NotificationProps";
 import Notification from "./Notification";
 import { SetStateAction } from "react";
+import { notificationDto } from "@/utils/types/validation/notification";
 
 export default function NotificationContainer({
   notifications,
   notificationsShown,
   setNotificationsShown,
 }: {
-  notifications: Array<NotificationProps>;
+  notifications: Array<notificationDto>;
   notificationsShown: boolean;
   setNotificationsShown: () => void;
 }) {

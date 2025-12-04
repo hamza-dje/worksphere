@@ -1,5 +1,6 @@
 import UserMessage from "@/components/inbox/UserMessage";
 import MessageProps from "@/utils/types/MessageProps";
+import { messageDto } from "@/utils/types/validation/messages";
 import Link from "next/link";
 
 export default function MessagesContainer({
@@ -7,12 +8,12 @@ export default function MessagesContainer({
   messagesShown,
   setMessagesShown,
 }: {
-  messages: Array<MessageProps>;
+  messages: Array<messageDto>;
   messagesShown: boolean;
   setMessagesShown: () => void;
 }) {
   const hasMessages = messages.length > 0;
-
+  const length = messages.length
   return (
     <div
       className={`absolute sm:left-1/2 sm:-translate-x-1/2 sm:top-[74px] sm:w-[360px] max-sm:w-full max-sm:top-[calc(100%+10px)] max-sm:left-0 max-sm:px-2 flex flex-col gap-1 transition-all duration-200 ease-out ${
@@ -37,7 +38,7 @@ export default function MessagesContainer({
         } no-scrollbar bg-white shadow-[0_0_27px_rgba(0,0,0,0.08)] rounded-[18px] overflow-auto`}
       >
         {hasMessages ? (
-          messages.map((message, i) => <UserMessage key={i} {...message} />)
+          messages.map((message, i) => <UserMessage key={i} message = {message} length={length} />)
         ) : (
           <span className="text-xs font-primary opacity-20">
             You have no messages

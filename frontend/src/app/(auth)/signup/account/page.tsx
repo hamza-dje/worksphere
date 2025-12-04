@@ -1,16 +1,12 @@
 "use client";
-import AccountCreated from "@/components/auth/signup/shared/AccountCreated";
-import StepOne from "@/components/auth/signup/shared/StepOne";
-import ChooseSkills from "@/components/auth/signup/work/ChooseSkills";
 import ProfileAppearance from "@/components/Auth/signup/work/ProfileAppearance";
-import ProfileFinished from "@/components/auth/signup/work/ProfileFinished";
 import { InputField } from "@/components/user-space/InputField";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
-import { SignUpDto, signUpSchema } from "@/utils/types/validation/schemas";
-import { signUp } from "@/api/services/auth";
+import { SignUpDto, signUpSchema } from "@/utils/types/validation/user";
+import { signUp } from "@/api/rest/services/auth";
 import { toast } from "react-hot-toast";
 import { useUserStore } from "@/store/store";
 import { useRouter } from "next/navigation";

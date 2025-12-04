@@ -17,7 +17,7 @@ export default function SignUpPage() {
 
       <div className="flex flex-col items-center">
         <h1 className="text-center w-fit bg-gradient-to-r from-blue to-green bg-clip-text text-transparent">
-          Welcome to WorkWave!
+          Welcome to WorkSpher!
         </h1>
         <p className="opacity-60 text-lg w-fit">What brings you here?</p>
       </div>

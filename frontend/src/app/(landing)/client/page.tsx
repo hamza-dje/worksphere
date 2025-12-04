@@ -110,9 +110,9 @@ export default function ClientLandingPage() {
           <div className="landing-container mx-auto z-[2]">
             <div className="flex flex-col col-span-6 max-xl:col-span-4 max-md:col-span-full [&_*]:text-white gap-5">
               <span className="font-primary font-extrabold text-[43px] max-md:text-3xl leading-14 max-md:leading-normal">
-                Ride the WorkWave and Catch the Perfect{" "}
+                Ride the WorkSpher and Catch the Perfect{" "}
                 <span className="font-primary font-extrabold bg-gradient-to-r from-blue to-green bg-clip-text text-transparent!">
-                  Wave of Opportunities!
+                  Spher of Opportunities!
                 </span>
               </span>
               <p className="font-secondary text-white text-[21.33px] max-md:text-lg tracking-[0.4px] mb-10">
@@ -138,7 +138,7 @@ export default function ClientLandingPage() {
         <section className="landing-container md:gap-y-14 md:max-xl:gap-y-10 ">
           <div className="col-span-full flex justify-center mb-8">
             <h1 className="col-span-full bg-gradient-to-r from-blue to-green w-fit bg-clip-text text-transparent max-md:text-3xl">
-              Why WorkWave?
+              Why WorkSpher?
             </h1>
           </div>
 
@@ -275,12 +275,12 @@ export default function ClientLandingPage() {
           </div>
           <div className="flex flex-col gap-5 max-xl:gap-2 xl:col-start-2 col-span-4 max-xl:col-span-3 max-lg:col-span-full z-[1]">
             <h1 className="text-white max-md:text-3xl max-sm:text-2xl">
-              WorkWave is totally free!
+              WorkSpher is totally free!
             </h1>
 
             <p className="text-[21px] max-md:text-lg tracking-wide text-white">
               And finally, you don’t have to pay on additional services on
-              WorkWave. Every user gets the full functionalities of WorkWave
+              WorkSpher. Every user gets the full functionalities of WorkSpher
               platform, which means that every user has the same chances, no pay
               for certification, no advertising services...
             </p>
@@ -295,7 +295,7 @@ export default function ClientLandingPage() {
 
           <Image
             src="/landing/free-section/image.png"
-            alt="WorkWave is totally free!"
+            alt="WorkSpher is totally free!"
             width={1000}
             height={0}
             className="my-auto xl:col-start-7 col-span-5 max-xl:col-span-3 max-lg:hidden z-[2]"

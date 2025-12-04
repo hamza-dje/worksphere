@@ -33,7 +33,7 @@ export default function AuthLogo() {
               path.startsWith("/signup") ? "text-white" : ""
             }`}
           >
-            Wave
+            Spher
           </span>
         </span>
       </Link>
@@ -45,7 +45,7 @@ export default function AuthLogo() {
             : "opacity-50"
         }`}
       >
-        © WorkWave 2024
+        © WorkSpher 2024
       </div>
     </>
   );

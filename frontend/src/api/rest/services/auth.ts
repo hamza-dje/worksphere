@@ -1,5 +1,5 @@
 import api, { errorHandler } from "../api";
-import { SignInDto, SignUpDto } from "@/utils/types/validation/schemas";
+import { SignInDto, SignUpDto } from "@/utils/types/validation/user";
 
 export const signIn = async (dto: SignInDto) => {
   try {

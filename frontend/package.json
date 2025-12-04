@@ -12,17 +12,20 @@
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "axios": "^1.13.2",
+    "jsonwebtoken": "^9.0.2",
     "next": "^16.0.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.67.0",
     "react-hot-toast": "^2.6.0",
+    "socket.io-client": "^4.8.1",
     "zod": "^4.1.13",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",

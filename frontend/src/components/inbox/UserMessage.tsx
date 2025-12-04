@@ -1,12 +1,13 @@
 import MessageProps from "@/utils/types/MessageProps";
+import { messageDto } from "@/utils/types/validation/messages";
 import Link from "next/link";
 
-export default function UserMessage(props: MessageProps) {
+export default function UserMessage({message, length}: {message: messageDto, length: number}) {
   return (
     <Link href={`/inbox/1`}>
       <div
-        className={`p-4 cursor-pointer ${props.className} ${
-          props.newMessage
+        className={`p-4 cursor-pointer  ${
+          message.content
             ? "bg-[oklch(from_var(--color-primary)_l_c_h_/_0.15)] hover:bg-[oklch(from_var(--color-primary)_l_c_h_/_0.25)]"
             : "hover:bg-[oklch(from_var(--color-primary)_l_c_h_/_0.08)]"
         } duration-200 transition-colors group`}
@@ -15,35 +16,35 @@ export default function UserMessage(props: MessageProps) {
           <div className="w-12 aspect-square bg-primary rounded-full flex-shrink-0" />
           <div
             className={`flex flex-1 flex-col ${
-              props.newMessage ? "" : "gap-1"
+              message.content ? "" : "gap-1"
             } min-w-0`}
           >
             <div className="flex justify-between">
               <span className="font-primary font-bold text-sm">
-                {props.user.fullname}
+                {message.content}
               </span>
               <span className="font-primary opacity-20 text-xs">
-                {props.time} ago
+                {message.createdAt?.toString()} ago
               </span>
             </div>
-            {props.newMessage ? (
+            {message.content ? (
               <>
                 <span className="truncate text-xs block opacity-40 flex-shrink mb-2 font-bold">
-                  {props.message}
+                  {message.content}
                 </span>
                 <div className="flex justify-between items-center">
                   <button className="small-menu-button bg-transparent p-0">
                     Mark as seen
                   </button>
                   <span className="text-white bg-red text-xs font-primary font-medium px-[5px] py-[1px] rounded-full">
-                    {props.messagesCount}
+                    {length}
                   </span>
                 </div>
               </>
             ) : (
               <div className="flex justify-between items-center">
                 <span className="truncate max-w-[90%] text-xs block opacity-40 flex-shrink">
-                  {props.message}
+                  {message.content}
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

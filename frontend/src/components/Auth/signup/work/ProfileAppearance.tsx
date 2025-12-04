@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
-import { SignUpDto } from "@/utils/types/validation/schemas";
+import { SignUpDto } from "@/utils/types/validation/user";
 import SignUpFormWrapper from "../SignUpFormWrapper";
 type Props = {
   header: string;
