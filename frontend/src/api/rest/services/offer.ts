@@ -5,10 +5,25 @@ import {errorHandler} from "../api";
 export const getOffers = async () => {
   try {
     const response = await api.get("/offer");
-    console.log("Offers response data:", response.data as OfferDto[]);
     return response.data as OfferDto[];
   } catch (error: any) {
     return errorHandler(error);
   }
 };
 
+export const enrolledOffer = async (offerId: number) => {
+   try{
+    const response = await api.patch(`/offer/enrolled/${offerId}`);
+    return response.data;
+   } catch (error: any) {
+    return errorHandler(error);
+  }
+}
+export const unenrolledOffer = async (offerId: number,userId : number) => {
+  try{
+   const response = await api.patch(`/offer/unenrolled/user/${offerId}/`+userId);
+   return response.data;
+  } catch (error: any) {
+    return errorHandler(error);
+  }
+}

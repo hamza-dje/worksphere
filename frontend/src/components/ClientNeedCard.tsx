@@ -2,8 +2,10 @@ import Image from "next/image";
 import OverlayButton from "./OverlayButton";
 import { OfferDto } from "@/utils/types/validation/offer";
 import { ca } from "zod/locales";
+import toast from "react-hot-toast";
+import { enrolledOffer } from "@/api/rest/services/offer";
 
-export default function ClientNeedCard({service , price , category, technologies, createdAt,description, user, photo }: OfferDto & { photo?: string }) {
+export default function ClientNeedCard({service , price , category, technologies, createdAt,description, user, photo , id}: OfferDto & { photo?: string }) {
   function timeAgo(date: Date | undefined) {
   const now = new Date();
   if (!date) return "unknown time ago";
@@ -19,7 +21,14 @@ export default function ClientNeedCard({service , price , category, technologies
   if (diffMinutes > 0) return `${diffMinutes} minute${diffMinutes > 1 ? "s" : ""} ago`;
   return `just now`;
 }
-
+  const enrolled = async (offerId : number) => {
+      const result = await enrolledOffer(offerId)
+      if((result as any).error){
+        return toast.error(`user can't enrolled to this offer : ${(result as any).error}`);
+      }
+      toast.success("user enrolled to this offer successfully")
+     }
+  
   return (
     <div className="border-1 border-[oklch(from_var(--color-black)_l_c_h_/_0.1)] px-10 py-9 max-sm:p-6 md:px-[84px] md:py-[40px] rounded-[36px] mb-[50px]">
       <div className="flex justify-between gap-7">
@@ -49,7 +58,6 @@ export default function ClientNeedCard({service , price , category, technologies
         <p className="text-xl max-md:text-sm max-md:tracking-wide text-black mb-[30px] md:leading-8">
           {description}
         </p>
-        <div className="mb-[10px] font-semibold">Technologies & Categories</div>
 
         <div className="flex gap-[8px] flex-wrap mb-[20px] max-sm:mb-4 max-md:gap-1.5 w-3/5">
           {[...(technologies || []), ...(category || [])].map((skill, i) => (
@@ -79,6 +87,7 @@ export default function ClientNeedCard({service , price , category, technologies
 
         <div className="flex gap-[18px] max-md:gap-2">
           <OverlayButton
+         
             openOverlayButton={
               <button className="normal-button border-2 border-red bg-transparent opacity-30 hover:opacity-100 max-sm:py-0">
                 <span className="max-sm:hidden font-primary font-bold text-red flex items-center gap-2">
@@ -109,8 +118,9 @@ export default function ClientNeedCard({service , price , category, technologies
           />
           {/* <BidDialogButton /> */}
           <OverlayButton
+           
             openOverlayButton={
-              <button className="normal-button">Place a bid</button>
+              <button className="normal-button" >Place a bid</button>
             }
             mainClassName="grid grid-cols-2 gap-5"
             overlayContent={
@@ -155,7 +165,7 @@ export default function ClientNeedCard({service , price , category, technologies
             }
             cancelButtonContent="Cancel editing!"
             confirmButton={
-              <button className="normal-button max-sm:text-xs">
+              <button className="normal-button max-sm:text-xs" onClick={()=>{id && enrolled(id)}}>
                 Finish applying
               </button>
             }
