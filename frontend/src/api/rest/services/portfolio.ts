@@ -41,7 +41,8 @@ export const updatePortfolio = async (dto?: PortfolioDto, file?: File) => {
   
   if (dto?.portfolioLink) 
     formData.append("portfolioLink", dto.portfolioLink);
-  if (file) formData.append("photo", file);
+  if (file) 
+    formData.append("file", file);
 
   try {
     const response = await api.patch("/portfolio", formData, {

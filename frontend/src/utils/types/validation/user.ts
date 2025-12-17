@@ -69,3 +69,15 @@ const ALLOWED_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
 
 
 export type PortfolioDto = z.infer<typeof portfolioSchema>;
+
+
+export const editProfileSchema = z.object({
+  firstName: z.string().min(2, "Invalid first name").max(50),
+  lastName: z.string().min(2, "Invalid last name").max(50),
+  mobile: z.string().min(10, "Invalid mobile number").max(15),
+  description: z.string().min(10, "Invalid description").max(500),
+  location: z.string().min(2, "Invalid location").max(100),
+  portfolioLink: z.url("Must be a valid URL").optional().or(z.literal("")),
+});
+
+export type EditProfileFormValues = z.infer<typeof editProfileSchema>;

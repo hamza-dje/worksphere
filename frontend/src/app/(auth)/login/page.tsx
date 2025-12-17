@@ -61,7 +61,7 @@ export default function LoginPage() {
           <div className="flex flex-col gap-6 max-sm:gap-4 mb-2.5">
             <InputField
               type="email"
-              placeholder="enter you email"
+              placeholder="enter your email"
               name="email"
               control={control}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>

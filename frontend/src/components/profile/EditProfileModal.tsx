@@ -1,23 +1,15 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { PortfolioDto, SignUpDto } from "@/utils/types/validation/user";
+import { EditProfileFormValues, editProfileSchema, PortfolioDto, SignUpDto } from "@/utils/types/validation/user";
 import { InputField } from "../user-space/InputField";
 import { updateProfile } from "@/api/rest/services/user";
 import { updatePortfolio } from "@/api/rest/services/portfolio";
 import toast from "react-hot-toast";
+import { Validation } from "../user-space/validation";
 
-const editProfileSchema = z.object({
-  firstName: z.string().min(2, "First name is required").max(50),
-  lastName: z.string().min(2, "Last name is required").max(50),
-  mobile: z.string().min(10, "Mobile number is required").max(15),
-  description: z.string().min(10, "Description is required").max(500),
-  location: z.string().min(2, "Location is required").max(100),
-  portfolioLink: z.string().url("Must be a valid URL").optional().or(z.literal("")),
-});
 
-type EditProfileFormValues = z.infer<typeof editProfileSchema>;
 
 interface EditProfileModalProps {
   isOpen: boolean;
@@ -37,18 +29,22 @@ export default function EditProfileModal({
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { control, handleSubmit, formState: { errors } } = useForm<EditProfileFormValues>({
-    resolver: zodResolver(editProfileSchema),
-    defaultValues: {
-      firstName: profile.firstName,
-      lastName: profile.lastName,
-      mobile: portfolio.mobile,
-      description: portfolio.description,
-      location: portfolio.location,
-      portfolioLink: portfolio.portfolioLink || "",
-    },
+   const {
+      control,
+      handleSubmit,
+      formState: { errors },
+    } = useForm({
+      resolver: zodResolver(editProfileSchema),
+      mode: "onChange",
+    });
+  const [handleChange, setHandleChange] = useState<EditProfileFormValues>({
+    firstName: profile.firstName || "",
+    lastName: profile.lastName || "",
+    mobile: portfolio.mobile || "",
+    description: portfolio.description || "",
+    location: portfolio.location || "",
+    portfolioLink: portfolio.portfolioLink || "",
   });
-
   const onSubmit = async (data: EditProfileFormValues) => {
     setIsLoading(true);
     try {
@@ -87,6 +83,7 @@ export default function EditProfileModal({
   };
 
   if (!isOpen) return null;
+  console.log(errors)
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
@@ -109,71 +106,81 @@ export default function EditProfileModal({
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Personal Info */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
+              <div className="space-y-2 flex-col flex">
                 <label className="text-sm font-medium text-gray-700">First Name</label>
                 <InputField
                   type="text"
                   placeholder="First Name"
                   name="firstName"
                   control={control}
-                  className="w-full p-3 rounded-xl border border-gray-200 focus:border-[var(--color-green)] focus:ring-1 focus:ring-[var(--color-green)] outline-none transition-all"
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setHandleChange({ ...handleChange, firstName: e.target.value })
+                  }
                 />
-                {errors.firstName && <p className="text-red-500 text-xs">{errors.firstName.message}</p>}
+                <Validation error={errors.firstName}></Validation>
               </div>
-              <div className="space-y-2">
+              <div className="space-y-2 flex-col flex">
                 <label className="text-sm font-medium text-gray-700">Last Name</label>
                 <InputField
                   type="text"
                   placeholder="Last Name"
                   name="lastName"
                   control={control}
-                  className="w-full p-3 rounded-xl border border-gray-200 focus:border-[var(--color-green)] focus:ring-1 focus:ring-[var(--color-green)] outline-none transition-all"
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setHandleChange({ ...handleChange, lastName: e.target.value })
+                  }
                 />
-                {errors.lastName && <p className="text-red-500 text-xs">{errors.lastName.message}</p>}
+                <Validation error={errors.lastName}></Validation>
               </div>
             </div>
 
             {/* Contact Info */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
+              <div className="space-y-2 flex-col flex">
                 <label className="text-sm font-medium text-gray-700">Mobile</label>
                 <InputField
                   type="tel"
                   placeholder="Mobile Number"
                   name="mobile"
                   control={control}
-                  className="w-full p-3 rounded-xl border border-gray-200 focus:border-[var(--color-green)] focus:ring-1 focus:ring-[var(--color-green)] outline-none transition-all"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                      setHandleChange({ ...handleChange, mobile: e.target.value })
+                    }
                 />
-                {errors.mobile && <p className="text-red-500 text-xs">{errors.mobile.message}</p>}
+                <Validation error={errors.mobile}></Validation>
               </div>
-              <div className="space-y-2">
+              <div className="space-y-2 flex-col flex">
                 <label className="text-sm font-medium text-gray-700">Location</label>
                 <InputField
                   type="text"
                   placeholder="City, Country"
                   name="location"
                   control={control}
-                  className="w-full p-3 rounded-xl border border-gray-200 focus:border-[var(--color-green)] focus:ring-1 focus:ring-[var(--color-green)] outline-none transition-all"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                      setHandleChange({ ...handleChange, location: e.target.value })
+                    }
                 />
-                {errors.location && <p className="text-red-500 text-xs">{errors.location.message}</p>}
+                <Validation error={errors.location}></Validation>
               </div>
             </div>
 
             {/* Portfolio Link */}
-            <div className="space-y-2">
+            <div className="space-y-2 flex-col flex">
               <label className="text-sm font-medium text-gray-700">Portfolio Link</label>
               <InputField
                 type="url"
                 placeholder="https://your-portfolio.com"
                 name="portfolioLink"
                 control={control}
-                className="w-full p-3 rounded-xl border border-gray-200 focus:border-[var(--color-green)] focus:ring-1 focus:ring-[var(--color-green)] outline-none transition-all"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                      setHandleChange({ ...handleChange, portfolioLink: e.target.value })
+                    }
               />
-              {errors.portfolioLink && <p className="text-red-500 text-xs">{errors.portfolioLink.message}</p>}
+              <Validation error={errors.portfolioLink}></Validation>
             </div>
 
             {/* Description */}
-            <div className="space-y-2">
+            <div className="space-y-2 flex-col flex">
               <label className="text-sm font-medium text-gray-700">About Me</label>
               <InputField
                 type="text" // InputField renders an input, but we might want a textarea. 
@@ -185,21 +192,17 @@ export default function EditProfileModal({
                 placeholder="Tell us about yourself..."
                 name="description"
                 control={control}
-                className="hidden" // Hiding this because I'll render a textarea below manually
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                      setHandleChange({ ...handleChange, description: e.target.value })
+                    }
               />
                {/* Manual Controller for Textarea since InputField is only input */}
-               <div className="relative">
-                  <textarea
-                    {...control.register("description")}
-                    className="w-full p-3 rounded-xl border border-gray-200 focus:border-[var(--color-green)] focus:ring-1 focus:ring-[var(--color-green)] outline-none transition-all min-h-[120px] resize-y"
-                    placeholder="Tell us about yourself..."
-                  />
-               </div>
-              {errors.description && <p className="text-red-500 text-xs">{errors.description.message}</p>}
+               
+                <Validation error={errors.description}></Validation>
             </div>
 
             {/* Photo Upload */}
-            <div className="space-y-2">
+            <div className="space-y-2 flex-col flex">
               <label className="text-sm font-medium text-gray-700">Profile Photo</label>
               <div className="flex items-center gap-4">
                 <label className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-xl cursor-pointer hover:bg-gray-50 transition-colors">
@@ -220,20 +223,20 @@ export default function EditProfileModal({
                 </span>
               </div>
             </div>
-
+                
             {/* Actions */}
             <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
               <button
                 type="button"
                 onClick={onClose}
-                className="px-6 py-2 rounded-xl text-gray-600 font-medium hover:bg-gray-100 transition-colors"
+                className="px-6 py-2 cursor-pointer rounded-xl text-gray-600 font-medium hover:bg-gray-100 transition-colors"
                 disabled={isLoading}
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-6 py-2 rounded-xl bg-[var(--color-green)] text-white font-medium hover:bg-[var(--color-dark-green)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                className="px-6 cursor-pointer py-2 rounded-xl bg-[var(--color-green)] text-white font-medium hover:bg-[var(--color-dark-green)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                 disabled={isLoading}
               >
                 {isLoading ? (

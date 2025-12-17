@@ -83,7 +83,7 @@ export default function ProfilePage() {
           {/* Edit Button */}
           <button
             onClick={() => setIsEditing(true)}
-            className="absolute top-6 right-6 p-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full text-white transition-all shadow-lg group z-10"
+            className="absolute cursor-pointer top-6 right-6 p-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full text-white transition-all shadow-lg group z-1"
             title="Edit Profile"
           >
             <svg
