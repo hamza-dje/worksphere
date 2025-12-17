@@ -4,8 +4,13 @@ import { OfferDto } from "@/utils/types/validation/offer";
 import { ca } from "zod/locales";
 import toast from "react-hot-toast";
 import { enrolledOffer } from "@/api/rest/services/offer";
+import { useState } from "react";
+import { useUserStore } from "@/store/store";
+import { createPaymentAccount } from "@/api/rest/services/payment";
 
 export default function ClientNeedCard({service , price , category, technologies, createdAt,description, user, photo , id}: OfferDto & { photo?: string }) {
+  const [url , setUrl] = useState<string | null>(null);
+  const userId = useUserStore((state) => state.id);
   function timeAgo(date: Date | undefined) {
   const now = new Date();
   if (!date) return "unknown time ago";
@@ -21,9 +26,18 @@ export default function ClientNeedCard({service , price , category, technologies
   if (diffMinutes > 0) return `${diffMinutes} minute${diffMinutes > 1 ? "s" : ""} ago`;
   return `just now`;
 }
+  const [error , setError] =  useState<string | null>(null);
   const enrolled = async (offerId : number) => {
       const result = await enrolledOffer(offerId)
       if((result as any).error){
+        setError((result as any).error);    
+    if(!userId) return console.log("user id is undefined");
+    const reponse = await createPaymentAccount(userId)
+    if((reponse as any).error){
+      toast.error(`Can't create stripe account: ${(reponse as any).error}`);
+      return;
+    }
+    setUrl(reponse);
         return toast.error(`user can't enrolled to this offer : ${(result as any).error}`);
       }
       toast.success("user enrolled to this offer successfully")
@@ -168,7 +182,10 @@ export default function ClientNeedCard({service , price , category, technologies
               <button className="normal-button max-sm:text-xs" onClick={()=>{id && enrolled(id)}}>
                 Finish applying
               </button>
+             
             }
+            error = {error}
+            url = {url}
           />
         </div>
       </div>

@@ -1,12 +1,18 @@
 "use client";
 
+import { createPaymentAccount } from "@/api/rest/services/payment";
+import { useUserStore } from "@/store/store";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   cloneElement,
   ReactElement,
   ReactNode,
   useEffect,
   useRef,
+  useState,
 } from "react";
+import toast from "react-hot-toast";
 
 export default function OverlayButton({
   openOverlayButton,
@@ -16,6 +22,8 @@ export default function OverlayButton({
   confirmButton,
   externalDataToPass,
   apiEndpoint,
+  error,
+  url,
 }: {
   openOverlayButton: ReactElement<Readonly<{ onClick: () => void }>>;
   overlayContent: ReactNode;
@@ -24,10 +32,14 @@ export default function OverlayButton({
   confirmButton: ReactElement;
   externalDataToPass?: Record<string, any>;
   apiEndpoint?: string;
+  error?: string | null;
+  url?: string | null;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const overlay = useRef<HTMLFormElement>(null);
-
+  const userId = useUserStore((state) => state.id);
+  const router = useRouter();
+  console.log(userId)
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (dialog.current?.open && !overlay.current?.contains(e.target as Node))
@@ -42,6 +54,8 @@ export default function OverlayButton({
   const openOverlayButtonClone = cloneElement(openOverlayButton, {
     onClick: () => dialog.current?.showModal(),
   });
+
+  
 
   return (
     <>
@@ -63,6 +77,7 @@ export default function OverlayButton({
             </button>
             <>{confirmButton}</>
           </div>
+          {error && <div className="col-span-full text-sm ">You don't have stripe account yet <Link href={url ? url : '/frl'} className="font-semibold ml-1 text-alternative-red cursor-pointer" >Create one</Link></div>}
         </form>
       </dialog>
     </>

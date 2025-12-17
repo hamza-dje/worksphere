@@ -45,7 +45,7 @@ export default function AuthLogo() {
             : "opacity-50"
         }`}
       >
-        © WorkSpher 2024
+        © WorkSphere 2024
       </div>
     </>
   );

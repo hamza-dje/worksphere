@@ -3,7 +3,7 @@ import ClientHistoryPage from "./ClientHistoryPage";
 
 export const metadata: Metadata = {
   title: "History",
-  description: "Your WorkSpher projects history",
+  description: "Your WorkSphere projects history",
 };
 
 export default function HistoryPage() {

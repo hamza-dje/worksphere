@@ -8,12 +8,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AuthLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function AuthLayout(props: LayoutProps<"/">) {
   return (
-    <body>
-      {children}
+    <body  className="min-h-screen flex flex-col">
+      {props.children}
       <AuthLogo />
     </body>
   );

@@ -3,7 +3,7 @@ import ClientDashboardPage from "./ClientDashboardPage";
 
 export const metadata: Metadata = {
   title: "Dashboard",
-  description: "Track your progress at WorkSpher",
+  description: "Track your progress at WorkSphere",
 };
 
 export default function DashboardPage() {

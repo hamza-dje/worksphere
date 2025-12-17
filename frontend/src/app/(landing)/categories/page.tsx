@@ -131,11 +131,11 @@ export default function CategoriesPage() {
 
         <div className="w-[800px] max-lg:w-[700px] max-md:w-2/3 flex items-center mx-auto relative z-[1]">
           <h1 className="text-white text-[43px] max-sm:text-3xl max-sm:leading-10">
-            WorkSpher Skill Categories
+            WorkSphere Skill Categories
           </h1>
           <Image
             src="/categories/logo.svg"
-            alt="WorkSpher"
+            alt="WorkSphere"
             width={1300}
             height={1300}
             className="size-[250px] max-md:hidden"

@@ -37,7 +37,7 @@ export default function LoginPage() {
       toast.error(`Login failed: ${(result as any).error}`);
     } else {
       toast.success("Logged in successfully!");
-      router.push("signup/setting");
+      router.push("/signup/setting");
     }
   };
 
@@ -54,7 +54,7 @@ export default function LoginPage() {
           <div className="flex flex-col items-center mb-[52px] text-center">
             <h1>Welcome!</h1>
             <p className="opacity-60 text-[18px] max-sm:text-sm">
-              Sign in to continue to WorkSpher.
+              Sign in to continue to WorkSphere.
             </p>
           </div>
 
@@ -86,13 +86,13 @@ export default function LoginPage() {
 
           <div className="flex justify-between text-black text-sm">
             <Link
-              href=""
+              href={"/signup"}
               className="opacity-50 hover:opacity-100 duration-200 transition-opacity"
             >
-              New to WorkSpher?
+              New to WorkSphere?
             </Link>
             <Link
-              href=""
+              href={"/forgot-password"}
               className="opacity-50 hover:opacity-100 duration-200 transition-opacity"
             >
               Forgot password?
@@ -107,7 +107,9 @@ export default function LoginPage() {
           <div className="relative  h-16  flex justify-center items-center w-full">
             <AuthButton
               onClick={() => {
-                router.push(`${process.env.NEXT_PUBLIC_API_URL}/auth/google`);
+                router.push(
+                  `${process.env.NEXT_PUBLIC_API_URL}/auth/google` as any
+                );
               }}
               platform="google"
               className=""

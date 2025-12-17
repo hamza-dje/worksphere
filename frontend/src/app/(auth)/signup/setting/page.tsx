@@ -56,6 +56,7 @@ export default function SignUpFreelancerPage() {
       return;
     }
     const result = await createPortfolio(portfolio, file);
+    console.log(result)
     if ((result as any).error) {
       toast.error(`Creating portfolio failed: ${(result as any).error}`);
     } else {

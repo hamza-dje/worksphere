@@ -10,3 +10,12 @@ export const getProfile = async () => {
     return errorHandler(error);
   }
 };
+
+export const updateProfile = async (data: Partial<SignUpDto>) => {
+  try {
+    const response = await api.put("user/update", data);
+    return response.data;
+  } catch (error: any) {
+    return errorHandler(error);
+  }
+};

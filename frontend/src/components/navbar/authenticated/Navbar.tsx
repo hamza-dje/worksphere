@@ -16,10 +16,12 @@ import { notificationDto } from "@/utils/types/validation/notification";
 import { getNotification } from "@/api/rest/services/notification";
 import { getMessages } from "@/api/rest/services/messages";
 import { messageDto } from "@/utils/types/validation/messages";
+import { useUserStore } from "@/store/store";
 
 type MenuKey = keyof MenuShownType;
 
 export default function Navbar() {
+  const setId = useUserStore((state) => state.setId);
   const [notifications, setNotifications] = useState<notificationDto[]>([]);
   const [messages, setMessages] = useState<messageDto[]>([]);
   const [profile, setProfile] = useState<SignUpDto>({
@@ -41,22 +43,18 @@ export default function Navbar() {
       const profileResult = await getProfile();
       if ((profileResult as any).error) {
         toast.error(`Can't get profile: ${(profileResult as any).error}`);
-        console.log((profileResult as any).error);
         return;
       }
-
       setProfile(profileResult as SignUpDto);
-      console.log("Fetched profile:", profileResult);
 
       const userId = (profileResult as SignUpDto).id;
-      if (!userId) return;
-
+      if (!userId) return;       
+      setId(userId);
+      
       const portfolioResult = await getPortfolio(userId);
-      console.log("Full Result:", portfolioResult); 
-      console.log("Image URL:", (portfolioResult as any).photo); // Check if this prints undefined
+    
       if ((portfolioResult as any).error) {
         toast.error(`Can't get portfolio: ${(portfolioResult as any).error}`);
-        console.log((portfolioResult as any).error);
       } else {
         setPortfolio(portfolioResult as { dto: PortfolioDto; photo: string });
         
@@ -69,7 +67,6 @@ export default function Navbar() {
         );
       } else {
         setNotifications(notificationResult as notificationDto[] | any);
-        console.log("Fetched notifications:", notificationResult);
       }
 
       const messagesResult = await getMessages();
@@ -79,7 +76,6 @@ export default function Navbar() {
         );
       } else {
         setMessages(messagesResult as messageDto[] | any);
-        console.log("Fetched messages:", messagesResult);
       }
     };
 
@@ -131,7 +127,7 @@ export default function Navbar() {
   // ];
   return (
     <div className="z-10 w-full py-5 shadow-[0_0_27px_rgba(0,0,0,0.08)] rounded-b-[36px] flex justify-between px-[140px] max-lg:px-[60px] max-sm:px-6 sticky top-0 right-0 left-0 bg-white">
-      <Link href="/home">
+      <Link href="/frl">
         <div className="flex gap-3.5 items-center">
           <Image src="/logo.svg" width={46} height={40} alt="Logo" priority />
           <span className="font-bold font-primary bg-gradient-to-r from-green to-blue bg-clip-text text-transparent text-[27px] max-sm:hidden">
