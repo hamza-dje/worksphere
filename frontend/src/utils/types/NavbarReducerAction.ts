@@ -1,5 +1,5 @@
 type NavbarReducerAction = {
-    type: "toggleMessages" | "toggleNotifications" | "toggleUser";
+  type: "toggleMessages" | "toggleNotifications" | "toggleUser";
 };
 
 export default NavbarReducerAction;

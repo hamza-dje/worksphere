@@ -2,10 +2,10 @@ import { Metadata } from "next";
 import ClientHistoryPage from "./ClientHistoryPage";
 
 export const metadata: Metadata = {
-    title: "History",
-    description: "Your WorkWave projects history",
+  title: "History",
+  description: "Your WorkSphere projects history",
 };
 
 export default function HistoryPage() {
-    return <ClientHistoryPage />;
+  return <ClientHistoryPage />;
 }

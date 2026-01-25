@@ -1,8 +1,8 @@
 type NotificationProps = {
-    title: string;
-    time: string;
-    description: string;
-    notChecked?: boolean;
+  purpose: string;
+  time?: string;
+  message: string;
+  checked?: boolean;
 };
 
 export default NotificationProps;

@@ -1,20 +1,20 @@
 export default function StatusLabel({
-    status,
+  status,
 }: {
-    status: "Done" | "Pending" | "Late";
+  status: "Done" | "Pending" | "Late";
 }) {
-    return (
-        <span
-            className={`font-primary px-2 py-0.5 rounded-full text-white
+  return (
+    <span
+      className={`font-primary px-2 py-0.5 rounded-full text-white
         ${
-            status === "Done"
-                ? "bg-green"
-                : status === "Pending"
-                ? "bg-yellow"
-                : "bg-red"
+          status === "Done"
+            ? "bg-green"
+            : status === "Pending"
+              ? "bg-yellow"
+              : "bg-red"
         }`}
-        >
-            {status}
-        </span>
-    );
+    >
+      {status}
+    </span>
+  );
 }
