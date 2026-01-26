@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+     <html lang="en" className={`${unbounded.variable} ${redHatDisplay.variable}`}>
       <body className="min-h-screen flex flex-col">
         {children}
         <Toaster position="top-right" reverseOrder={false} />

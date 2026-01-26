@@ -5,9 +5,9 @@ export default function LandingLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <body>
+    <>
       <Navbar />
       {children}
-    </body>
+    </>
   );
 }
