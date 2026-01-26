@@ -29,7 +29,7 @@ export default function HomePage() {
     <>
       <FilterBar />
       <div className="w-[1100px] max-xl:w-[900px] max-lg:w-full max-lg:px-8 max-md:px-2 mx-auto mt-10">
-        {offers && offers.map((offer) => (
+        {offers && offers?.map((offer) => (
           <ClientNeedCard key={offer.id} user={offer.user} service={offer.service} price={offer.price} category={offer.category} technologies={offer.technologies} createdAt={offer.createdAt} description={offer.description} photo={offer.user?.portfolio?.photo} id = {offer.id} />
         ))}
       </div>
