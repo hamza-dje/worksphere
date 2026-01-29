@@ -1,4 +1,4 @@
-import AuthLogo from "@/components/auth/AuthLogo";
+import AuthLogo from "@/components/Auth/AuthLogo";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

@@ -221,7 +221,7 @@ export default function ClientLandingPage() {
               </Link>
 
               <Link
-                href={""}
+                href={"/categories"}
                 className="lg:hidden font-primary font-bold cursor-pointer h-fit text-white opacity-40 hover:opacity-100 transition-opacity duration-150 max-sm:text-sm max-sm:text-center"
               >
                 View categories
